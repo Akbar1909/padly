@@ -1,0 +1,62 @@
+# Local backing services for `npm run dev` + `npm run worker:dev`.
+#   docker compose -p vio-dev -f docker-compose.dev.yml up -d
+#   docker compose -p vio-dev -f docker-compose.dev.yml --profile gpu up -d   # + CPU gpu-service
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vio
+      POSTGRES_PASSWORD: vio
+      POSTGRES_DB: vio
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - pg-dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vio"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    ports:
+      - "127.0.0.1:56379:6379"
+    volumes:
+      - redis-dev:/data
+
+  # S3-compatible stand-in for Cloudflare R2. The app creates the bucket on
+  # first use when S3_CREATE_BUCKET=true.
+  minio:
+    image: quay.io/minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "127.0.0.1:59000:9000"
+      - "127.0.0.1:59001:9001"
+    volumes:
+      - minio-dev:/data
+
+  # CPU-only GPU-service stand-in (classic backend, no ML models).
+  gpu-service:
+    build:
+      context: ./gpu-service
+      dockerfile: Dockerfile.cpu
+    environment:
+      # classic = simple CPU stand-in; replicate = real BiRefNet + Real-ESRGAN (set in .env).
+      MODEL_BACKEND: ${GPU_MODEL_BACKEND:-classic}
+      # replicate = use Replicate only when a cut-out fails its checks (see README).
+      ESCALATION_BACKEND: ${GPU_ESCALATION_BACKEND:-none}
+      REPLICATE_API_TOKEN: ${REPLICATE_API_TOKEN:-}
+      GPU_SERVICE_SECRET: dev-gpu-secret
+      ALLOW_HTTP_URLS: "1"
+    ports:
+      - "127.0.0.1:58000:8000"
+    profiles: ["gpu"]
+
+volumes:
+  pg-dev:
+  redis-dev:
+  minio-dev:

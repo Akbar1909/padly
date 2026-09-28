@@ -1,0 +1,11 @@
+# Padly: https://images.qancha.live
+User-agent: *
+Allow: /
+# $ and the trailing / keep these from matching /apple-touch-icon.png or a future /author page.
+Disallow: /app$
+Disallow: /app/
+Disallow: /app?
+Disallow: /auth/
+Disallow: /webhooks
+Disallow: /s3-proxy
+Disallow: /try

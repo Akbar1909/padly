@@ -1,0 +1,13 @@
+# Service runtime (CPU-only; no torch). Used by the classic and replicate backends and by
+# requirements-gpu.txt. Versions are the ones the test-suite was run against.
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+pydantic==2.13.5
+pydantic-settings==2.15.0
+httpx==0.28.1
+pillow==12.3.0
+numpy==2.4.6
+# 4.x on purpose: OpenCV 5.0's MSER returns no regions on sharp synthetic text (breaks the
+# text-detector fallback); EAST + MSER are verified on 4.14.
+opencv-python-headless==4.14.0.94
+scikit-image==0.26.0

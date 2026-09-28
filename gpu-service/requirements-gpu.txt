@@ -1,0 +1,16 @@
+# Local GPU backend (MODEL_BACKEND=local): BiRefNet via transformers remote code +
+# Real-ESRGAN via spandrel. CUDA 12.4 wheels.
+-r requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.5.1
+torchvision==0.20.1
+# BiRefNet's remote code (birefnet.py) is known to work with transformers 4.4x; transformers
+# 5.x and meta-device initialisation changes in late 4.5x have broken it. Pin together with
+# BIREFNET_REVISION when upgrading.
+transformers==4.46.3
+huggingface_hub>=0.24,<1.0
+safetensors>=0.4.5,<1.0
+timm==1.0.12
+einops==0.8.0
+kornia==0.7.4
+spandrel==0.4.1

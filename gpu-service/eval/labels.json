@@ -1,0 +1,1300 @@
+{
+ "version": 1,
+ "created": "2026-09-28",
+ "labeller": "Claude (visual review of blind labelling sheets: the gate's verdict was not shown)",
+ "request": "evallib.REQUEST (the app's default preset)",
+ "grades": {
+  "good": "publishable as is",
+  "minor": "small flaws a typical merchant would accept",
+  "bad": "not publishable without fixing (part missing, prop/background kept, holes, wrong object)"
+ },
+ "labels": [
+  {
+   "id": "perfume-roses",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the roses and the printed Chanel box (props) around the bottle"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "bottle only, cap and glass edges clean; nothing else kept"
+   }
+  },
+  {
+   "id": "mug-desk-laptop",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the laptop (prop) next to the mug; faint ghost rectangles of background visible on blue"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the laptop (prop) next to the mug"
+   }
+  },
+  {
+   "id": "red-nike-concrete",
+   "local": {
+    "grade": "minor",
+    "reason": "both shoes intact; dark heel/back edges slightly soft where the shoe blends into the shadowy ground"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "both shoes intact; dark heel/back edges slightly soft where the shoe blends into the shadowy ground"
+   }
+  },
+  {
+   "id": "gold-hoop-earrings",
+   "local": {
+    "grade": "minor",
+    "reason": "model and both hoops intact; orange backdrop fringe along the hair edges (esp. left side)"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "model and both hoops intact; slight orange backdrop fringe on parts of the hair edge"
+   }
+  },
+  {
+   "id": "straw-hat-beach",
+   "local": {
+    "grade": "minor",
+    "reason": "model, hat and dress kept; open-weave brim holes retain pale sky fill instead of being cleared, barely visible on white"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "model, hat and dress kept; open-weave brim holes retain pale sky fill instead of being cleared, barely visible on white"
+   }
+  },
+  {
+   "id": "clear-perfume-in-sand",
+   "local": {
+    "grade": "bad",
+    "reason": "ragged sand edge kept along the bottom and lower-left, sand mound kept on the right shoulder; bottle base is a torn sandy outline"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "ragged sand edge kept along the bottom and lower-left; bottle base is a torn sandy outline"
+   }
+  },
+  {
+   "id": "clear-glass-bottle-colored-backdrop",
+   "local": {
+    "grade": "minor",
+    "reason": "bottle, cap and lettering intact; faint semi-transparent rectangular haze around the bottle (visible on blue, not on white)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "bottle, cap and lettering intact, clean edges, no backdrop or cast shadow kept"
+   }
+  },
+  {
+   "id": "black-headphones-on-black",
+   "local": {
+    "grade": "bad",
+    "reason": "left side of the headband has a smeared, jagged inner edge with dark blotches/notch visible at normal size"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "whole headphones kept incl. headband and yokes; clean edges"
+   }
+  },
+  {
+   "id": "black-sneakers-on-dark",
+   "local": {
+    "grade": "minor",
+    "reason": "both shoes intact; slightly fuzzy edge on the rear shoe's collar"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "both shoes intact with clean edges, no backdrop kept"
+   }
+  },
+  {
+   "id": "white-tealight-on-white",
+   "local": {
+    "grade": "minor",
+    "reason": "cup intact but the flame tip is flattened/partly lost and faint; edges soft"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "cup and flame intact; soft only from low source resolution, no background kept"
+   }
+  },
+  {
+   "id": "gold-pendant-necklace",
+   "local": {
+    "grade": "minor",
+    "reason": "whole necklace kept, but pale/pinkish background fill left inside the pendant's openwork gaps (subtle on white, obvious on blue)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "whole necklace and chain kept, openwork gaps cleared, clean"
+   }
+  },
+  {
+   "id": "rubber-plant-pot",
+   "local": {
+    "grade": "good",
+    "reason": "whole plant and pot kept; leaf margins clean (cream edges are natural variegation)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "whole plant and pot kept; leaf margins clean (cream edges are natural variegation)"
+   }
+  },
+  {
+   "id": "skincare-orange-packaging",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the white square display frame (prop) and a large white backdrop panel at top-right"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the white square display frame (prop)"
+   }
+  },
+  {
+   "id": "cosmetic-tube-leaves",
+   "local": {
+    "grade": "bad",
+    "reason": "leaves removed, but the tube's top-left crimp corner (hidden by a leaf in the source) is missing, leaving a visible notch; faint ghost leaf/backdrop haze on blue"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "leaves removed, but the tube's top-left crimp corner (hidden by a leaf in the source) is missing, leaving a visible notch"
+   }
+  },
+  {
+   "id": "watch-wood",
+   "local": {
+    "grade": "bad",
+    "reason": "grey shadow smear and rough brownish textured chunks kept under the case at the bottom"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "watch and strap intact, no table kept; small rough textured patch under the case at bottom-left"
+   }
+  },
+  {
+   "id": "clear-bottle-green-cap",
+   "local": {
+    "grade": "good",
+    "reason": "bottle, sprayer and green cap all kept, clean edges, no floor shadow"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "bottle, sprayer and green cap all kept, clean edges, no floor shadow"
+   }
+  },
+  {
+   "id": "sneakers-floating-studio",
+   "local": {
+    "grade": "good",
+    "reason": "both shoes intact incl. pull tabs and laces; floor shadow removed; clean edges"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "both shoes intact incl. pull tabs and laces; floor shadow removed; clean edges"
+   }
+  },
+  {
+   "id": "white-headphones-yellow",
+   "local": {
+    "grade": "bad",
+    "reason": "thin cable broken/faded just below the crossover (visible gap); yellow fringe along the left cable"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "headphones and cable complete; slight yellow backdrop fringe along the left cable and cup rims"
+   }
+  },
+  {
+   "id": "green-chair-studio",
+   "local": {
+    "grade": "bad",
+    "reason": "thin metal stretcher rod between the front legs is broken into ghostly smeared fragments"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "whole chair incl. the thin stretcher rod kept; floor shadow removed; clean"
+   }
+  },
+  {
+   "id": "lip-gloss-white",
+   "local": {
+    "grade": "minor",
+    "reason": "tube, wand and cap intact; faint semi-transparent cast shadow kept to the lower right (visible on blue, not on white)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "tube, wand and cap intact, shadow removed, clean edges"
+   }
+  },
+  {
+   "id": "perfume-red-cap-white",
+   "local": {
+    "grade": "good",
+    "reason": "bottle and cap intact; soft edges only from low source resolution"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "bottle and cap intact; clean edges"
+   }
+  },
+  {
+   "id": "black-tshirt-hanger-shadow",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the large grey wall cast shadow to the right of and below the shirt (plus the hanger)"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "shirt intact and wall shadow removed; faint light-grey fragments of the removed hanger hook left above the collar"
+   }
+  },
+  {
+   "id": "armchair-orange-cushion",
+   "local": {
+    "grade": "minor",
+    "reason": "whole chair and cushion kept; faint semi-transparent wall/floor haze around it (visible on blue only), slightly rough frame edge on the left"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "whole chair and cushion kept, gaps between arms/legs cleared, clean edges"
+   }
+  },
+  {
+   "id": "outfit-flatlay-white",
+   "local": {
+    "grade": "minor",
+    "reason": "jeans, T-shirt and boot all kept; white T-shirt edges soft/feathered with slight halo, faint shadow line at jeans' left edge"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "jeans, T-shirt and boot all kept with clean edges"
+   }
+  },
+  {
+   "id": "tote-bag-yellow-wall",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the mugs (props) with a smeared, half-erased second mug and plant; faint ghost of the wall picture top-left"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the mugs and plant (props) next to the bag"
+   }
+  },
+  {
+   "id": "toy-vehicles-white-sheet",
+   "local": {
+    "grade": "minor",
+    "reason": "both vehicles kept; sheet fill left inside the truck's open windshield frame, front rail slightly faded (only visible on blue)"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "both vehicles kept; white sheet fill left inside the truck's open windshield frame (only visible on blue)"
+   }
+  },
+  {
+   "id": "bentwood-chair-white-room",
+   "local": {
+    "grade": "minor",
+    "reason": "whole chair incl. thin legs and ring kept; slight pale fringe along the backrest and legs"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "whole chair incl. thin legs and ring kept; clean edges"
+   }
+  },
+  {
+   "id": "red-wine-glass-white",
+   "local": {
+    "grade": "minor",
+    "reason": "glass, wine, stem and foot intact; small grey shadow smudge kept under the left edge of the foot"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "glass, wine, stem and foot intact; clean edges, no shadow kept"
+   }
+  },
+  {
+   "id": "hyacinth-glass-vase",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the wooden tray/stand (prop) under the vase, cut flat at the bottom"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the wooden tray/stand (prop) under the vase, cut flat at the bottom"
+   }
+  },
+  {
+   "id": "white-sneakers-white-floor",
+   "local": {
+    "grade": "good",
+    "reason": "both shoes kept with clean edges, floor removed; flat top cut is inherited from the source crop"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "both shoes kept with clean edges, floor removed; flat top cut is inherited from the source crop"
+   }
+  },
+  {
+   "id": "spray-trigger-cut",
+   "local": {
+    "grade": "good",
+    "reason": "trigger head and bottle neck intact, rear-handle opening correctly cleared; clean edges (bottom cut inherited from source)"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "trigger head and bottle neck intact; small opening in the rear handle left filled with backdrop (invisible on white)"
+   }
+  },
+  {
+   "id": "green-bottle-splash-green",
+   "local": {
+    "grade": "bad",
+    "reason": "flying cap dropped; splash kept only as disconnected ghostly semi-transparent smears (left splash gone), looks like dirt on white"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "bottle, flying cap and most of the splash kept; splash is faint/patchy in places but reads as a splash"
+   }
+  },
+  {
+   "id": "watch-dark-sparkles",
+   "local": {
+    "grade": "bad",
+    "reason": "far-side bracelet cut away; blurry dark semi-transparent smear at the top-right of the bezel and ragged fuzzy edges around the bracelet"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "whole watch incl. dark far-side bracelet kept; that bracelet is a near-featureless black silhouette, edges otherwise clean"
+   }
+  },
+  {
+   "id": "ring-held-fingers",
+   "local": {
+    "grade": "minor",
+    "reason": "ring intact and stone removed; holding hand kept (acceptable on-model) but it floats with flat chopped ends where the source frame cut it"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "fingers removed but a dark fingertip/shadow stub left on the ring's right end where the finger overlapped; ring edges heavily feathered/blurry"
+   }
+  },
+  {
+   "id": "perfume-pink-white-shadows",
+   "local": {
+    "grade": "bad",
+    "reason": "kept a large grey hard-shadow chunk hanging under the bottle"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the pink flowers on the floor (prop) at lower left"
+   }
+  },
+  {
+   "id": "chest-of-drawers-room",
+   "local": {
+    "grade": "bad",
+    "reason": "nothing cut out: whole room photo returned framed on a pink pad, blue panel empty"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the sofa, floor lamp and orchid pots (props) next to the chest"
+   }
+  },
+  {
+   "id": "teapot-glass-table-room",
+   "local": {
+    "grade": "bad",
+    "reason": "nothing cut out: whole room photo returned framed on a beige pad, blue panel empty"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "teapot and all five cups kept; table, tealights and chair removed; clean edges"
+   }
+  },
+  {
+   "id": "almost-offcentre-rattan-chair",
+   "local": {
+    "grade": "minor",
+    "reason": "chair and cushion intact and re-centred; white fill left in back-weave gaps and between paired leg rods, light fringe on legs (visible on blue only)"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "chair and cushion intact and re-centred; light fringe on legs and a semi-transparent patch in the seat weave (visible on blue only)"
+   }
+  },
+  {
+   "id": "almost-cream-bg-hoodie",
+   "local": {
+    "grade": "minor",
+    "reason": "model and hoodie intact, cream removed; faint light halo along the silhouette visible on blue, clean on white"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "model and hoodie intact, cream removed; thin light halo along shoulders/sleeves and hair visible on blue, clean on white"
+   }
+  },
+  {
+   "id": "handbag-armchair",
+   "local": {
+    "grade": "bad",
+    "reason": "strap broken into floating pieces: the buckle segment is detached with a gap and part of the strap between it and the bag ring is missing; faint grey haze left near the bag's lower left"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "clean edges and hardware; the strap ends in a straight cut where the armchair hid it in the original, which looks a little odd but comes from the photo"
+   }
+  },
+  {
+   "id": "bag-retro-chair",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the prop leather bag on the seat; faint rectangular ghost of the background at left (visible on blue); stray threads, a reddish speck and shadow smears around the seat and legs; rough leg ends"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the prop leather bag sitting on the seat (the note says it is a prop); the chair cut-out itself is clean"
+   }
+  },
+  {
+   "id": "beige-hoodie-model",
+   "local": {
+    "grade": "good",
+    "reason": "clean; hoodie and model intact, crisp edges"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; hoodie and model intact, crisp edges"
+   }
+  },
+  {
+   "id": "leather-handbag-held",
+   "local": {
+    "grade": "minor",
+    "reason": "bag, handle scarf and model are intact; faint thin streaks left from the curb line beside the bag and skirt, barely visible on blue"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; bag with scarf handle and model intact, no leftover background"
+   }
+  },
+  {
+   "id": "sunglasses-hat-man",
+   "local": {
+    "grade": "good",
+    "reason": "clean; sunglasses, cap and polo intact, crisp edges (only an imperceptible tint band in the background)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; sunglasses, cap and polo intact"
+   }
+  },
+  {
+   "id": "clear-perfume-on-white",
+   "local": {
+    "grade": "minor",
+    "reason": "flower prop and shadow removed and the cap and glass are kept; slightly wavy, rough edge on the lower right of the bottle"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; bottle, crystal cap and collar intact, smooth edges, prop and shadow removed"
+   }
+  },
+  {
+   "id": "glass-water-bottles-labels",
+   "local": {
+    "grade": "bad",
+    "reason": "all four bottles kept, but there is a visible bite/notch in the left edge of the second bottle beside the first bottle and a wavy right edge on the first bottle; dents the clean glass outline"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "all four bottles with caps and labels intact, clean edges"
+   }
+  },
+  {
+   "id": "white-bridal-heels-on-tulle",
+   "local": {
+    "grade": "bad",
+    "reason": "a fuzzy chunk of tulle is kept between the shoes and smeared across the rear shoe's ankle strap; soft, fuzzy edges"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "both sandals intact including the thin ankle straps; tulle removed; edges only as soft as the photo"
+   }
+  },
+  {
+   "id": "black-watch-on-black",
+   "local": {
+    "grade": "bad",
+    "reason": "the strap outline is lumpy and blurred, with a dark shadow mass kept past the lower-left of the case; the lower strap end is ragged and fuzzy"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "watch head and logo clean; the strap is cut where it fades into the black backdrop and there is a slight dark shadow at the lower-left of the case"
+   }
+  },
+  {
+   "id": "folding-bicycle",
+   "local": {
+    "grade": "bad",
+    "reason": "most wheel spokes are gone, so both wheels look almost empty; white background blotches kept around both hubs and the disc (visible on blue); faint softbox ghost lines at the top"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "spokes only partly kept and broken, with patches of white background between them in both wheels (clear on blue); wheels look incomplete"
+   }
+  },
+  {
+   "id": "knit-sweater-stack",
+   "local": {
+    "grade": "good",
+    "reason": "clean; all five sweaters intact, straight cut only where the photo edge cuts the stack"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; all five sweaters intact, knit edges preserved"
+   }
+  },
+  {
+   "id": "tassel-earrings",
+   "local": {
+    "grade": "minor",
+    "reason": "both earrings intact with beads and hooks; the hook wires look slightly jagged, stray tassel fibres are trimmed, and there is a very faint wood-grain residue visible only on blue"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "both earrings intact with smooth hooks, fine fibres preserved, background fully removed"
+   }
+  },
+  {
+   "id": "medk8-cosmetic-box",
+   "local": {
+    "grade": "bad",
+    "reason": "no cut-out: the output is the whole uncut photo (surface and shadow) on grey, and the blue check panel is empty; nothing found"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; carton and all its text intact, shadow and surface removed, straight edges"
+   }
+  },
+  {
+   "id": "sports-tshirt-hanger",
+   "local": {
+    "grade": "good",
+    "reason": "clean; shirt, logos, hanger and holding hand kept (the arm is cut only where it leaves the photo); the blue tint on the shirt is from the original lighting"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; shirt, logos, hanger and hand intact, crisp edges"
+   }
+  },
+  {
+   "id": "necklace-stand",
+   "local": {
+    "grade": "minor",
+    "reason": "the whole chain is kept and the bust and blocks are removed; the out-of-focus left strand is thick and soft with a faint pale fringe and a blob at its tip"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "the whole chain is kept and thin, bust and blocks removed, no specks"
+   }
+  },
+  {
+   "id": "yellow-sneakers-concrete",
+   "local": {
+    "grade": "good",
+    "reason": "clean; both sneakers with laces, shoe tree and knob intact, concrete removed"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; both sneakers intact; only a thin see-through sliver in the dark crease between the shoes"
+   }
+  },
+  {
+   "id": "red-sneakers-white",
+   "local": {
+    "grade": "good",
+    "reason": "clean; both sneakers, heel tabs and loose laces intact"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; both sneakers, heel tabs and loose laces intact"
+   }
+  },
+  {
+   "id": "rangefinder-camera-white",
+   "local": {
+    "grade": "good",
+    "reason": "clean; camera, knobs and lens intact, shadow removed"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; camera, knobs and lens intact, shadow removed"
+   }
+  },
+  {
+   "id": "wooden-stool-white",
+   "local": {
+    "grade": "good",
+    "reason": "clean; seat and all legs intact, shadow removed"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; seat and all legs intact, shadow removed"
+   }
+  },
+  {
+   "id": "toy-figure-white",
+   "local": {
+    "grade": "bad",
+    "reason": "the figure's dark brown feet under the body are cut off; faint shadow smear left below"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "the figure's dark brown feet under the body are cut off (the blurred pale top part of the figure is kept)"
+   }
+  },
+  {
+   "id": "lip-gloss-box-pink",
+   "local": {
+    "grade": "minor",
+    "reason": "gloss and box both kept, backdrop removed; the box and tube edges are slightly wavy and uneven instead of straight"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "gloss and box both kept with straight clean edges"
+   }
+  },
+  {
+   "id": "mesh-watch-white-fabric",
+   "local": {
+    "grade": "bad",
+    "reason": "a white fabric fold is kept inside the strap loop between the strap and the case (a clear grey-white patch on blue)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; fabric fully removed, mesh strap, clasp and case intact"
+   }
+  },
+  {
+   "id": "table-lamp-nightstand",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the prop decor (a ghostly, semi-transparent glass cloche with coral, and the starfish ornament); the lamp base edges are smeared and the nightstand is dropped"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the prop decor (glass cloche, starfish ornament); the nightstand is only partly kept, and its right half dissolves into ghostly patches"
+   }
+  },
+  {
+   "id": "headphones-camera-flatlay",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the prop camera lens in the top-left corner; the headphones themselves are intact"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the prop camera lens in the top-left corner; the headphones themselves are clean"
+   }
+  },
+  {
+   "id": "blue-perfume-starfish",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the large prop starfish overlapping the bottle and a bit of another starfish at the bottle base"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "kept the large prop starfish overlapping the bottle and a bit of another starfish at the bottle base"
+   }
+  },
+  {
+   "id": "wooden-chair-dark",
+   "local": {
+    "grade": "good",
+    "reason": "clean; back, slats and arm intact, dark wall removed (straight cuts only where the photo edge cuts the chair)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; back, slats and arm intact, dark wall removed"
+   }
+  },
+  {
+   "id": "wine-bottle-and-glass",
+   "local": {
+    "grade": "minor",
+    "reason": "bottle and glass both kept; the out-of-focus glass rim and foot have slightly lumpy, uneven edges"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "bottle and glass both kept with smooth edges, cork and label intact"
+   }
+  },
+  {
+   "id": "wine-glass-hard-shadow",
+   "local": {
+    "grade": "minor",
+    "reason": "glass kept whole and the hard shadow on the card removed; a thin grey shadow sliver is left along the foot's right rim, the right side of the bowl is slightly lumpy, and a very faint residue band shows on blue"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "glass kept whole with smooth outline, hard shadow removed (only the see-through stem shadow inside the foot, which is part of the photo)"
+   }
+  },
+  {
+   "id": "white-mug-white-table",
+   "local": {
+    "grade": "minor",
+    "reason": "mug and handle intact and the background removed; the outer edge of the handle is slightly jagged"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; mug and handle intact with smooth edges"
+   }
+  },
+  {
+   "id": "sneaker-closeup-cut",
+   "local": {
+    "grade": "bad",
+    "reason": "kept a large white floor reflection under the front sneaker; the second sneaker's white sole was removed, leaving its upper floating with a flat cut bottom"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "the second sneaker is dropped entirely except its lace, and a white floor-reflection chunk is kept under the sole"
+   }
+  },
+  {
+   "id": "disco-ball-sunlight",
+   "local": {
+    "grade": "minor",
+    "reason": "ball and hanging hook intact, floor shadow and sparkles removed; a very faint floor haze is left in the background near the top of the ball (visible only on blue) and the outline is slightly uneven"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; ball and hook intact, smooth round outline, shadows and sparkles removed"
+   }
+  },
+  {
+   "id": "green-perfume-dark",
+   "local": {
+    "grade": "bad",
+    "reason": "misshapen outline: a jagged notch or protrusion on the right side of the cap, a bump on the right shoulder and a lumpy bottom edge"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "bottle and cap kept with a mostly smooth outline; slightly rough right edge and a small bulge at the bottom-right corner"
+   }
+  },
+  {
+   "id": "sneaker-store-wall",
+   "local": {
+    "grade": "bad",
+    "reason": "no cut-out: the whole uncut store photo is padded on brown, and the blue check panel is empty"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "arbitrary subset of the wall's sneakers cut out as a floating column, with shelf slabs kept and shoes cut off at the edges; not a usable product image"
+   }
+  },
+  {
+   "id": "tiny-gold-ring-white-fabric",
+   "local": {
+    "grade": "bad",
+    "reason": "no cut-out: the uncut fabric photo is padded on grey with the ring tiny in a corner, and the blue check panel is empty"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "ring found and whole, but a thick glowing fringe of fabric colour surrounds it and pinkish-white fabric is kept in the gaps between the chain links (clear on blue); only hidden on white. Graded bad rather than minor because the halo is wide, not slight"
+   }
+  },
+  {
+   "id": "perfume-black-pine",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the prop white flower and several pine-branch fragments with wispy half-transparent needles around the bottle"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "bottle only, props removed, cap and label intact (pine seen through the glass is part of the photo); the glass outline is slightly rough on the left, right and lower edges"
+   }
+  },
+  {
+   "id": "boots-on-feet-bw",
+   "local": {
+    "grade": "bad",
+    "reason": "both boots are intact and the paving is removed, but the wearer's grey trouser leg below the left boot is kept as a fragment torn off with a ragged, jagged edge, and a pale knee patch is kept at the bottom right; looks messy"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "both boots are intact and clean, paving removed; the wearer's trousers are kept as oddly cut fragments (a pointed shard below the left boot, a pale patch at the bottom right), but the edges are smooth"
+   }
+  },
+  {
+   "id": "watermark-camera",
+   "local": {
+    "grade": "good",
+    "reason": "clean; camera body, lens, dials and strap lug intact; the watermark over the camera comes from the input and no watermark or background fragments are left outside it"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; camera body, lens, dials and strap lug intact; the watermark over the camera comes from the input and nothing is left outside it"
+   }
+  },
+  {
+   "id": "almost-4x5-sunglasses",
+   "local": {
+    "grade": "minor",
+    "reason": "both pairs kept whole with temples and tips; a slight whitish fringe around the gold bridge and the wire rims (visible on blue)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "both pairs kept whole with clean rims, bridge and temple tips"
+   }
+  },
+  {
+   "id": "almost-light-grey-bridal-heels",
+   "local": {
+    "grade": "good",
+    "reason": "clean; both sandals, straps, heels and jewelled bands intact, grey removed"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean; both sandals, straps, heels and jewelled bands intact, grey removed"
+   }
+  },
+  {
+   "id": "floor-lamp-sofa",
+   "local": {
+    "grade": "bad",
+    "reason": "nothing cut out: output is the whole original room scene inset on gray, blue view empty; lamp not isolated"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "wrong object: kept the sofa, glass coffee table and vase (props) and dropped the tripod floor lamp entirely"
+   }
+  },
+  {
+   "id": "heels-wood-floor",
+   "local": {
+    "grade": "bad",
+    "reason": "brown floor chunks kept in the gaps between the shoes of each pair (clearly visible between the silver pair) plus a faint ghost band of the floor across the image"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: all 4 shoes intact, gaps between shoes open, no floor or shadow kept"
+   }
+  },
+  {
+   "id": "black-watch-on-wrist",
+   "local": {
+    "grade": "minor",
+    "reason": "wrist removed, watch intact; edges slightly soft with a faint gray fringe at lower left and a fuzzy semi-transparent tip on the upper-right bracelet end"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: wrist removed, watch and visible bracelet intact with crisp edges"
+   }
+  },
+  {
+   "id": "polka-dot-dress-sun-hat",
+   "local": {
+    "grade": "bad",
+    "reason": "wallpaper kept: cream patches behind the waist and beside the lower skirt, a dark stripe fragment at the bottom left, and faint vertical stripe ghosts across the background"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: model, dress and hat fully kept, no wallpaper left, hair edges fine"
+   }
+  },
+  {
+   "id": "sunglasses-and-clear-eyeglasses",
+   "local": {
+    "grade": "bad",
+    "reason": "background kept: a white surface/shadow blob at lower left of the eyeglasses, a beige shadow patch under the sunglasses bridge, and white fill inside the eyeglasses double bridge"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "both glasses intact, shadows removed; small semi-transparent whitish fill inside the eyeglasses double bridge, lenses carry some surface tone"
+   }
+  },
+  {
+   "id": "diamond-silver-ring",
+   "local": {
+    "grade": "minor",
+    "reason": "ring intact; faint gray shadow remnant along the bottom edge and slightly soft outline"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: ring and stone intact, crisp edges, no shadow"
+   }
+  },
+  {
+   "id": "steel-bracelet-watch",
+   "local": {
+    "grade": "good",
+    "reason": "clean: watch, crown/pushers and full bracelet kept, rail and bokeh removed, crisp edges"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: watch and full bracelet intact, rail removed, crisp edges"
+   }
+  },
+  {
+   "id": "white-pump-bottle-on-white",
+   "local": {
+    "grade": "bad",
+    "reason": "eucalyptus sprig (prop) kept floating above the bottle, with a faint ghost stem beside it"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "props kept: marble plinth under the bottle and the metal-lid jar (cut off at the right edge)"
+   }
+  },
+  {
+   "id": "cream-vases-on-white",
+   "local": {
+    "grade": "minor",
+    "reason": "all three vases clean with no shadow; handle loop of the left vase and the gaps in the dried sprig are filled with semi-transparent white backdrop (hidden on white, halo on colour)"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "all three vases clean, handle loops open; dried sprig has a whitish backdrop halo and some florets faded/thinned"
+   }
+  },
+  {
+   "id": "fur-slippers-on-rug",
+   "local": {
+    "grade": "good",
+    "reason": "clean: both slippers and letter charms intact, rug and floor removed, fur edge natural"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: both slippers and charms intact, no rug remnants, fur edge natural"
+   }
+  },
+  {
+   "id": "plush-bear-in-grass",
+   "local": {
+    "grade": "minor",
+    "reason": "bear intact; a few thin grass blades left across the ear, chin and belly and a slight dark-green fringe along the lower edge"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "bear intact; thin grass blade strands/notches left across the ear and belly where grass crossed the bear"
+   }
+  },
+  {
+   "id": "chanel-no5-box-flowers",
+   "local": {
+    "grade": "bad",
+    "reason": "kept the rose, cushion and a fallen rose (props) and the box has a large bite missing on the lower right where the rose overlapped"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "box isolated but a large chunk of its lower right is missing (rose-shaped hole) and a bit of rose stem kept at the bottom"
+   }
+  },
+  {
+   "id": "iphone-box-unboxing",
+   "local": {
+    "grade": "good",
+    "reason": "clean: all 5 items (lid, tray, phone, document pack, coiled cable) kept, wood removed, cable coil centre open"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: all 5 items kept with crisp edges, wood removed, cable coil centre open"
+   }
+  },
+  {
+   "id": "topo-chico-bottle",
+   "local": {
+    "grade": "minor",
+    "reason": "bottle and label intact (clear body rendered whitish, fine on white); a thin greenish surface-reflection band kept under the base"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: bottle, cap and label intact, base feet follow the real shape, no reflection kept"
+   }
+  },
+  {
+   "id": "flatlay-shoes",
+   "local": {
+    "grade": "bad",
+    "reason": "brogues fine, but the kept glasses are smeared and jagged with broken, ghostly lower rims and the watch strap has a dark uneven smear"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "brogues, watch and glasses cleanly cut; navy backdrop left inside the clear eyeglass lenses so they read as tinted"
+   }
+  },
+  {
+   "id": "beats-headphones-table",
+   "local": {
+    "grade": "minor",
+    "reason": "headphones complete, table removed; dark earcup and headband-slider edges are slightly lumpy/soft where they met the shadow (small notch on the right earcup)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: headband and both earcups intact, table and shadow removed, edges acceptable at normal size"
+   }
+  },
+  {
+   "id": "camera-mirrorless-white",
+   "local": {
+    "grade": "good",
+    "reason": "clean: body, lens, dials, strap lug and red disc intact, no shadow"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: body, lens, dials, strap lug and red disc intact, no shadow"
+   }
+  },
+  {
+   "id": "pentax-camera-strap",
+   "local": {
+    "grade": "good",
+    "reason": "clean: camera, red strap and thin black strap connectors all kept, no surface or shadow"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: camera, red strap and thin connectors all kept, no surface or shadow"
+   }
+  },
+  {
+   "id": "lipstick-compact-white",
+   "local": {
+    "grade": "good",
+    "reason": "clean: lipstick and open compact intact, mirror surface fully kept, no shadow or reflection on the table"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "hole in the product: a large curved region of the compact mirror is cut out (blue shows through; on white it reads as an odd white patch across the mirror)"
+   }
+  },
+  {
+   "id": "espresso-cup-saucer",
+   "local": {
+    "grade": "good",
+    "reason": "clean: cup, handle and saucer intact, wood removed including through the handle loop"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: cup, handle and saucer intact, wood removed including through the handle loop"
+   }
+  },
+  {
+   "id": "three-cameras-white",
+   "local": {
+    "grade": "bad",
+    "reason": "stack of books (prop) kept under the rightmost camera"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "stack of books (prop) kept under the rightmost camera"
+   }
+  },
+  {
+   "id": "two-mugs-marble-plant",
+   "local": {
+    "grade": "minor",
+    "reason": "both mugs kept, plant and marble removed; small bump on the left mug's handle and a very faint ghost line above the left mug"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: both mugs and handles intact, plant and marble removed"
+   }
+  },
+  {
+   "id": "hoodies-on-rack",
+   "local": {
+    "grade": "bad",
+    "reason": "clothing rack (not the product) kept, plus a transparent white smear/hole cut across the lower rail and both hoodies"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "clothing rack (not the product) kept, and a hole where the wooden hanger at bottom right was cut out"
+   }
+  },
+  {
+   "id": "watch-beside-mug",
+   "local": {
+    "grade": "bad",
+    "reason": "props kept: the mug, a book page and the book edge, plus a stray floating blob at the top"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "mug (prop) kept next to the watch"
+   }
+  },
+  {
+   "id": "perfume-dried-flower",
+   "local": {
+    "grade": "bad",
+    "reason": "dried flowers (prop) kept in front of the bottle base"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "dried flowers (prop) kept in front of the bottle base"
+   }
+  },
+  {
+   "id": "small-chair-white-studio",
+   "local": {
+    "grade": "minor",
+    "reason": "chair complete; a narrow strip of white backdrop kept between the right front and back legs plus a smudge at one foot (hidden on white, shows on colour), slightly soft edges"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "chair complete and crisp; thin whitish fringe along the inner edge of the right back leg"
+   }
+  },
+  {
+   "id": "blue-perfume-shadow-stripes",
+   "local": {
+    "grade": "bad",
+    "reason": "ragged strip of the glossy surface reflection kept under the bottle, visible as a gray smear on white"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: bottle, cap and printed text intact, glass edges crisp, no surface or reflection kept"
+   }
+  },
+  {
+   "id": "champagne-glass-shadow",
+   "local": {
+    "grade": "bad",
+    "reason": "the long cast shadow (bowl blob and stem line) kept as a large gray shape beside the flute"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "the cast shadow of the bowl kept as a large blurry gray blob beside the flute"
+   }
+  },
+  {
+   "id": "white-pump-bottle-leaves",
+   "local": {
+    "grade": "bad",
+    "reason": "small jar (part of the described product) dropped, and the bottle outline is lumpy/misshapen at the shoulder and base where the blurred leaves crossed"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "bottle and jar both kept, leaves, paper and marble removed; bottle base edge slightly soft/uneven"
+   }
+  },
+  {
+   "id": "white-nike-red-cut",
+   "local": {
+    "grade": "minor",
+    "reason": "sneaker and laces intact (heel cut by frame as in original); lower sole and heel edges soft and wavy with an orange fringe"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: sneaker, laces and logo intact, crisp sole edge, no red backdrop kept"
+   }
+  },
+  {
+   "id": "green-spray-bottle-mirror",
+   "local": {
+    "grade": "bad",
+    "reason": "the bottle's mirror reflection (a second ghost bottle) and a corner of the gold mirror frame kept behind the bottle"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: bottle, spray cap and printed text intact, reflection and mirror removed"
+   }
+  },
+  {
+   "id": "headphones-dim-desk",
+   "local": {
+    "grade": "bad",
+    "reason": "nothing cut out: output is the whole original scene inset on gray, blue view empty"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "headphones isolated with both cups and headband, desk and keyboard removed; edges soft/slightly lumpy on the out-of-focus left cup and headband outline approximate"
+   }
+  },
+  {
+   "id": "headphones-stand-room",
+   "local": {
+    "grade": "bad",
+    "reason": "stand base badly eaten into a jagged crescent on the right; rest of headphones fine (left cut is the photo edge)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: headphones and stand intact, room, glass and cables removed (left cut is the photo edge)"
+   }
+  },
+  {
+   "id": "gold-rings-stone",
+   "local": {
+    "grade": "minor",
+    "reason": "both rings intact, stone and greenery removed; soft edges with a pale blotchy fringe along the base of the lower ring and very faint background ghosting"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: both rings intact with the inner gap open, no stone or shadow kept, edges acceptable"
+   }
+  },
+  {
+   "id": "lipstick-vanity-mirror",
+   "local": {
+    "grade": "bad",
+    "reason": "powder jar dropped, the pink compact kept only as a ragged smeared fragment, and faint ghost patches of the gilt mirror frame left in the background"
+   },
+   "paid": {
+    "grade": "bad",
+    "reason": "only the lipstick kept: the cap, palette, compact and powder (note: lipstick and makeup, multiple products) all dropped"
+   }
+  },
+  {
+   "id": "blonde-hairpiece-mannequin",
+   "local": {
+    "grade": "minor",
+    "reason": "hairpiece and display hand complete; faint whitish backdrop halo around the hair outline and the stray bottom-left strand is pale/semi-transparent"
+   },
+   "paid": {
+    "grade": "minor",
+    "reason": "hairpiece and display hand complete, stray strands kept; faint whitish backdrop halo around the hair outline"
+   }
+  },
+  {
+   "id": "watermark-sneakers-tiled",
+   "local": {
+    "grade": "good",
+    "reason": "clean cut-out: both sneakers, laces and pull tabs intact, backdrop, shadows and off-product watermark removed (watermark printed over the shoes is from the source, not a cut-out defect)"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean cut-out: both sneakers intact, backdrop, shadows and off-product watermark removed (watermark over the shoes is from the source)"
+   }
+  },
+  {
+   "id": "almost-tight-tassel-earrings",
+   "local": {
+    "grade": "good",
+    "reason": "clean: both earrings with thin hooks, beads and tassel fringe intact, now with proper margin"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: both earrings with thin hooks, beads and tassel fringe intact, now with proper margin"
+   }
+  },
+  {
+   "id": "almost-low-gold-necklace",
+   "local": {
+    "grade": "minor",
+    "reason": "necklace, chain and drop stone intact; a few small whitish semi-transparent specks near the right arm of the pendant"
+   },
+   "paid": {
+    "grade": "good",
+    "reason": "clean: full chain, pendant openings and drop stone intact, no specks"
+   }
+  }
+ ]
+}

@@ -1,0 +1,2419 @@
+{
+ "version": 1,
+ "created": "2026-09-27",
+ "request": {
+  "aspect": "1:1",
+  "margin_pct": 8,
+  "bg_color": "#FFFFFF",
+  "remove_bg": true
+ },
+ "licence": "Photos: Pexels License (https://www.pexels.com/license/), downloaded from the Pexels CDN at 1600 px wide. repo_file entries are Padly outputs made from Pexels photos (public/examples/CREDITS.md). Derived entries are deterministic edits of other entries (fetch.py).",
+ "tiers": {
+  "EASY": "clean studio or plain background, strong contrast, one clear product",
+  "MEDIUM": "room or furniture scenes, cast shadows, product and background of similar colour, several products, props",
+  "HARD": "transparent/glass, jewelry and thin parts, fur/hair, white-on-white, product cut by the photo edge, complex reflections, watermark over the product, busy lifestyle scenes, on-model, low light"
+ },
+ "expected_no_change_rule": "true only when the photo already meets the request as is: aspect 1:1 (within 1%), background pure white (border >= 250 in every channel), product bbox centred (within 1% of the side) with 8% (+-1.5%) margin on its limiting axis and at least that on the other.",
+ "images": [
+  {
+   "id": "perfume-roses",
+   "file": "perfume-roses.jpg",
+   "source": "https://www.pexels.com/photo/chanel-perfume-bottle-lying-among-cream-roses-22589360/",
+   "download": "https://images.pexels.com/photos/22589360/pexels-photo-22589360.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "busy-scene",
+    "props",
+    "touching-edge"
+   ],
+   "notes": "Chanel No 5 perfume bottle (the roses and the printed Chanel box are props)",
+   "expected_no_change": false
+  },
+  {
+   "id": "handbag-armchair",
+   "file": "handbag-armchair.jpg",
+   "source": "https://www.pexels.com/photo/luxury-handbag-on-armchair-5591912/",
+   "download": "https://images.pexels.com/photos/5591912/pexels-photo-5591912.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "HARD",
+   "categories": [
+    "bags"
+   ],
+   "conditions": [
+    "props",
+    "fine-detail",
+    "similar-colours"
+   ],
+   "notes": "Coach signature-denim shoulder bag with tan leather strap (the grey armchair is a prop)",
+   "expected_no_change": false
+  },
+  {
+   "id": "floor-lamp-sofa",
+   "file": "floor-lamp-sofa.jpg",
+   "source": "https://www.pexels.com/photo/floor-lamp-beside-sofa-and-window-1571471/",
+   "download": "https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "HARD",
+   "categories": [
+    "furniture",
+    "home-decor"
+   ],
+   "conditions": [
+    "busy-scene",
+    "props",
+    "small-product"
+   ],
+   "notes": "tripod floor lamp with white shade (standing behind the sofa's right end; the sofa, glass coffee table and vase are props)",
+   "expected_no_change": false
+  },
+  {
+   "id": "mug-desk-laptop",
+   "file": "mug-desk-laptop.jpg",
+   "source": "https://www.pexels.com/photo/coffee-cup-on-desk-by-laptop-5942728/",
+   "download": "https://images.pexels.com/photos/5942728/pexels-photo-5942728.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "HARD",
+   "categories": [
+    "kitchen",
+    "transparent"
+   ],
+   "conditions": [
+    "busy-scene",
+    "props",
+    "touching-edge"
+   ],
+   "notes": "clear glass espresso mug with coffee (the laptop is a prop)",
+   "expected_no_change": false
+  },
+  {
+   "id": "bag-retro-chair",
+   "file": "bag-retro-chair.jpg",
+   "source": "https://www.pexels.com/photo/retro-chair-with-bag-on-carpet-in-room-8025617/",
+   "download": "https://images.pexels.com/photos/8025617/pexels-photo-8025617.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "MEDIUM",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "props",
+    "busy-scene"
+   ],
+   "notes": "antique carved chair with tapestry upholstery (the small brown leather bag on the seat reads as a styling prop; the photo's subject is the chair)",
+   "expected_no_change": false
+  },
+  {
+   "id": "heels-wood-floor",
+   "file": "heels-wood-floor.jpg",
+   "source": "https://www.pexels.com/photo/high-heels-on-a-wooden-floor-8997979/",
+   "download": "https://images.pexels.com/photos/8997979/pexels-photo-8997979.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "MEDIUM",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "two pairs of high-heel pumps (nude patent pair and silver glitter pair; 4 shoes)",
+   "expected_no_change": false
+  },
+  {
+   "id": "red-nike-concrete",
+   "file": "red-nike-concrete.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photography-of-red-nike-basketball-shoes-1307128/",
+   "download": "https://images.pexels.com/photos/1307128/pexels-photo-1307128.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/lifestyle",
+   "tier": "MEDIUM",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "text-on-product"
+   ],
+   "notes": "pair of red Nike high-top sneakers",
+   "expected_no_change": false
+  },
+  {
+   "id": "beige-hoodie-model",
+   "file": "beige-hoodie-model.jpg",
+   "source": "https://www.pexels.com/photo/black-man-in-hoodie-near-gray-wall-6311488/",
+   "download": "https://images.pexels.com/photos/6311488/pexels-photo-6311488.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "on-model"
+   ],
+   "notes": "Beige hoodie and joggers worn by a model (back view) against a grey textured concrete wall",
+   "expected_no_change": false
+  },
+  {
+   "id": "black-watch-on-wrist",
+   "file": "black-watch-on-wrist.jpg",
+   "source": "https://www.pexels.com/photo/person-wearing-black-watch-at-right-wrist-2410047/",
+   "download": "https://images.pexels.com/photos/2410047/pexels-photo-2410047.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "dark-products"
+   ],
+   "conditions": [
+    "on-model"
+   ],
+   "notes": "Rado ceramic wristwatch worn on a wrist (hand and forearm in frame, blurry outdoor background)",
+   "expected_no_change": false
+  },
+  {
+   "id": "gold-hoop-earrings",
+   "file": "gold-hoop-earrings.jpg",
+   "source": "https://www.pexels.com/photo/woman-wearing-gold-hoop-earrings-in-close-up-photography-14411703/",
+   "download": "https://images.pexels.com/photos/14411703/pexels-photo-14411703.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "HARD",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "on-model",
+    "fur-hair"
+   ],
+   "notes": "Large gold hoop earrings worn by a model (close-up beauty shot on an orange backdrop)",
+   "expected_no_change": false
+  },
+  {
+   "id": "leather-handbag-held",
+   "file": "leather-handbag-held.jpg",
+   "source": "https://www.pexels.com/photo/woman-holding-leather-handbag-932401/",
+   "download": "https://images.pexels.com/photos/932401/pexels-photo-932401.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "HARD",
+   "categories": [
+    "bags"
+   ],
+   "conditions": [
+    "on-model",
+    "text-on-product"
+   ],
+   "notes": "Structured leather top-handle handbag (green/black/red, gold horseshoe clasp, silk-scarf handle) held in the hand of a model in a plaid skirt and fishnets, street background",
+   "expected_no_change": false
+  },
+  {
+   "id": "polka-dot-dress-sun-hat",
+   "file": "polka-dot-dress-sun-hat.jpg",
+   "source": "https://www.pexels.com/photo/model-in-a-sun-hat-and-a-summer-dress-with-polka-dots-20478836/",
+   "download": "https://images.pexels.com/photos/20478836/pexels-photo-20478836.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "HARD",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "on-model",
+    "busy-scene"
+   ],
+   "notes": "Tiered polka-dot dress (plus straw sun hat) on a model against black-and-cream vertical-striped wallpaper",
+   "expected_no_change": false
+  },
+  {
+   "id": "straw-hat-beach",
+   "file": "straw-hat-beach.jpg",
+   "source": "https://www.pexels.com/photo/woman-wearing-a-straw-hat-on-a-beach-17742457/",
+   "download": "https://images.pexels.com/photos/17742457/pexels-photo-17742457.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "HARD",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "on-model",
+    "fine-detail",
+    "busy-scene"
+   ],
+   "notes": "Open-weave crochet straw hat (and white sundress) worn by a model on a beach, sky and sea behind",
+   "expected_no_change": false
+  },
+  {
+   "id": "sunglasses-hat-man",
+   "file": "sunglasses-hat-man.jpg",
+   "source": "https://www.pexels.com/photo/man-in-hat-and-sunglasses-posing-in-studio-16711108/",
+   "download": "https://images.pexels.com/photos/16711108/pexels-photo-16711108.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/on-model",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "on-model"
+   ],
+   "notes": "Black acetate sunglasses with amber lenses (plus cap and knit polo) on a model, dark olive studio backdrop",
+   "expected_no_change": false
+  },
+  {
+   "id": "sunglasses-and-clear-eyeglasses",
+   "file": "sunglasses-and-clear-eyeglasses.jpg",
+   "source": "https://www.pexels.com/photo/two-eyewear-on-white-surface-1499477/",
+   "download": "https://images.pexels.com/photos/1499477/pexels-photo-1499477.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "clothing",
+    "transparent",
+    "white-on-white",
+    "multiple-products"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Two eyewear products on a near-white surface with hard cast shadows: black cat-eye sunglasses with metal bridge, and thin wire-frame octagonal eyeglasses with clear light-blue lenses",
+   "expected_no_change": false
+  },
+  {
+   "id": "clear-perfume-in-sand",
+   "file": "clear-perfume-in-sand.jpg",
+   "source": "https://www.pexels.com/photo/clear-glass-perfume-bottle-with-silver-cap-8361540/",
+   "download": "https://images.pexels.com/photos/8361540/pexels-photo-8361540.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "busy-scene"
+   ],
+   "notes": "Square clear-glass perfume bottle with polished silver cap and blank white label, tilted and half-buried in sand (lifestyle shot)",
+   "expected_no_change": false
+  },
+  {
+   "id": "clear-perfume-on-white",
+   "file": "clear-perfume-on-white.jpg",
+   "source": "https://www.pexels.com/photo/a-clear-glass-perfume-bottle-on-the-table-8450248/",
+   "download": "https://images.pexels.com/photos/8450248/pexels-photo-8450248.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "reflections"
+   ],
+   "notes": "Amber perfume in a clear glass bottle with faceted clear crystal cap and gold collar, on a white table (white flower prop at left is not the product)",
+   "expected_no_change": false
+  },
+  {
+   "id": "diamond-silver-ring",
+   "file": "diamond-silver-ring.jpg",
+   "source": "https://www.pexels.com/photo/diamond-silver-colored-ring-750148/",
+   "download": "https://images.pexels.com/photos/750148/pexels-photo-750148.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "reflections"
+   ],
+   "notes": "Polished silver pave ring with a large clear faceted stone, black-and-white shot on a light-gray gradient",
+   "expected_no_change": false
+  },
+  {
+   "id": "clear-glass-bottle-colored-backdrop",
+   "file": "clear-glass-bottle-colored-backdrop.jpg",
+   "source": "https://www.pexels.com/photo/clear-glass-bottle-136651/",
+   "download": "https://images.pexels.com/photos/136651/pexels-photo-136651.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "shadows",
+    "text-on-product"
+   ],
+   "notes": "Clear glass fragrance bottle with chrome cap and embossed 'tommy' lettering, on a saturated pink/blue backdrop with a colored cast shadow",
+   "expected_no_change": false
+  },
+  {
+   "id": "glass-water-bottles-labels",
+   "file": "glass-water-bottles-labels.jpg",
+   "source": "https://www.pexels.com/photo/purely-sedona-water-bottles-on-white-background-31012803/",
+   "download": "https://images.pexels.com/photos/31012803/pexels-photo-31012803.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "transparent",
+    "multiple-products"
+   ],
+   "conditions": [
+    "text-on-product"
+   ],
+   "notes": "Four clear glass water bottles with paper labels and colored caps, on white (a four-item product line-up)",
+   "expected_no_change": false
+  },
+  {
+   "id": "steel-bracelet-watch",
+   "file": "steel-bracelet-watch.jpg",
+   "source": "https://www.pexels.com/photo/silver-watch-on-gray-background-18136803/",
+   "download": "https://images.pexels.com/photos/18136803/pexels-photo-18136803.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/transparent-reflective",
+   "tier": "HARD",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "reflections",
+    "props"
+   ],
+   "notes": "Stainless-steel chronograph watch with polished link bracelet, standing on a dark wooden rail with bokeh lights behind",
+   "expected_no_change": false
+  },
+  {
+   "id": "black-headphones-on-black",
+   "file": "black-headphones-on-black.jpg",
+   "source": "https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/",
+   "download": "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "similar-colours"
+   ],
+   "notes": "Black over-ear headphones (Audio-Technica ATH-M50x), flat lay on a black textured surface",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-bridal-heels-on-tulle",
+   "file": "white-bridal-heels-on-tulle.jpg",
+   "source": "https://www.pexels.com/photo/beige-high-heeled-sandals-2085527/",
+   "download": "https://images.pexels.com/photos/2085527/pexels-photo-2085527.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "white-on-white",
+    "multiple-products"
+   ],
+   "conditions": [
+    "fine-detail",
+    "similar-colours"
+   ],
+   "notes": "Pair of white/nude stiletto sandals with crystal toe straps, lying on white bridal tulle",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-pump-bottle-on-white",
+   "file": "white-pump-bottle-on-white.jpg",
+   "source": "https://www.pexels.com/photo/skincare-product-in-bottle-on-white-table-5797999/",
+   "download": "https://images.pexels.com/photos/5797999/pexels-photo-5797999.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "white-on-white"
+   ],
+   "conditions": [
+    "props"
+   ],
+   "notes": "White 'Hand & Body Cream' pump bottle with a black pump (styled with a marble plinth, a metal-lid jar, crumpled paper and eucalyptus)",
+   "expected_no_change": false
+  },
+  {
+   "id": "black-sneakers-on-dark",
+   "file": "black-sneakers-on-dark.jpg",
+   "source": "https://www.pexels.com/photo/close-up-shot-of-a-rubber-shoes-on-black-background-12306282/",
+   "download": "https://images.pexels.com/photos/12306282/pexels-photo-12306282.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "dark-products",
+    "multiple-products"
+   ],
+   "conditions": [
+    "similar-colours"
+   ],
+   "notes": "Pair of black/white/red basketball sneakers on a black backdrop",
+   "expected_no_change": false
+  },
+  {
+   "id": "black-watch-on-black",
+   "file": "black-watch-on-black.jpg",
+   "source": "https://www.pexels.com/photo/watch-on-black-background-11973853/",
+   "download": "https://images.pexels.com/photos/11973853/pexels-photo-11973853.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "dark-products"
+   ],
+   "conditions": [
+    "similar-colours"
+   ],
+   "notes": "Black-dial chronograph watch (Fossil) with a black leather strap on a black backdrop",
+   "expected_no_change": false
+  },
+  {
+   "id": "cream-vases-on-white",
+   "file": "cream-vases-on-white.jpg",
+   "source": "https://www.pexels.com/photo/vases-on-a-white-background-5040767/",
+   "download": "https://images.pexels.com/photos/5040767/pexels-photo-5040767.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "home-decor",
+    "white-on-white",
+    "multiple-products"
+   ],
+   "conditions": [
+    "similar-colours",
+    "shadows"
+   ],
+   "notes": "Three small cream ceramic vases/pitchers (one holding a dried pink flower sprig) on an off-white backdrop",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-tealight-on-white",
+   "file": "white-tealight-on-white.jpg",
+   "source": "https://www.pexels.com/photo/white-candle-on-white-background-4662223/",
+   "download": "https://images.pexels.com/photos/4662223/pexels-photo-4662223.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/low-contrast",
+   "tier": "HARD",
+   "categories": [
+    "home-decor",
+    "white-on-white"
+   ],
+   "conditions": [
+    "small-product"
+   ],
+   "notes": "Single lit aluminium-cup tealight candle on a pale grey-white backdrop (small in frame)",
+   "expected_no_change": false
+  },
+  {
+   "id": "folding-bicycle",
+   "file": "folding-bicycle.jpg",
+   "source": "https://www.pexels.com/photo/modern-bicycle-in-studio-15009948/",
+   "download": "https://images.pexels.com/photos/15009948/pexels-photo-15009948.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "HARD",
+   "categories": [
+    "sports"
+   ],
+   "conditions": [
+    "fine-detail",
+    "busy-scene"
+   ],
+   "notes": "Grey folding e-bike (EVELO) in a photo studio with softboxes and light stands; product = the bicycle (spokes, brake cables, rack)",
+   "expected_no_change": false
+  },
+  {
+   "id": "fur-slippers-on-rug",
+   "file": "fur-slippers-on-rug.jpg",
+   "source": "https://www.pexels.com/photo/furry-slippers-on-a-rug-8412747/",
+   "download": "https://images.pexels.com/photos/8412747/pexels-photo-8412747.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "fur-hair",
+    "similar-colours"
+   ],
+   "notes": "Pair of beige faux-fur slide slippers with LOCK / DOWN letter charms, on a beige shag rug and a white floor (two products, beige on beige)",
+   "expected_no_change": false
+  },
+  {
+   "id": "gold-pendant-necklace",
+   "file": "gold-pendant-necklace.jpg",
+   "source": "https://www.pexels.com/photo/a-necklace-on-a-white-background-7134458/",
+   "download": "https://images.pexels.com/photos/7134458/pexels-photo-7134458.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "HARD",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "fine-detail"
+   ],
+   "notes": "Gold necklace with an openwork crystal pendant and teardrop stone, on a bluish-white background; a fine chain runs off the photo at the top-left and the right",
+   "expected_no_change": false
+  },
+  {
+   "id": "knit-sweater-stack",
+   "file": "knit-sweater-stack.jpg",
+   "source": "https://www.pexels.com/photo/close-up-shot-of-knitted-sweaters-on-white-surface-5475173/",
+   "download": "https://images.pexels.com/photos/5475173/pexels-photo-5475173.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing",
+    "multiple-products"
+   ],
+   "conditions": [
+    "touching-edge"
+   ],
+   "notes": "Stack of five folded knit sweaters (rib, cable knit, fine knit) on a grey gradient background; the stack runs off the right edge of the photo",
+   "expected_no_change": false
+  },
+  {
+   "id": "plush-bear-in-grass",
+   "file": "plush-bear-in-grass.jpg",
+   "source": "https://www.pexels.com/photo/white-bear-plush-toy-185848/",
+   "download": "https://images.pexels.com/photos/185848/pexels-photo-185848.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "HARD",
+   "categories": [
+    "toys"
+   ],
+   "conditions": [
+    "fur-hair",
+    "busy-scene"
+   ],
+   "notes": "White plush teddy bear lying in green grass (lifestyle)",
+   "expected_no_change": false
+  },
+  {
+   "id": "rubber-plant-pot",
+   "file": "rubber-plant-pot.jpg",
+   "source": "https://www.pexels.com/photo/a-plant-with-white-background-4596578/",
+   "download": "https://images.pexels.com/photos/4596578/pexels-photo-4596578.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "HARD",
+   "categories": [
+    "home-decor"
+   ],
+   "conditions": [
+    "touching-edge",
+    "fine-detail"
+   ],
+   "notes": "Variegated rubber plant (Ficus elastica) in a dark grey pot on white; the pot is cut by the bottom of the photo",
+   "expected_no_change": false
+  },
+  {
+   "id": "tassel-earrings",
+   "file": "tassel-earrings.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photography-of-blue-earrings-1413420/",
+   "download": "https://images.pexels.com/photos/1413420/pexels-photo-1413420.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/fine-detail",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "multiple-products"
+   ],
+   "conditions": [
+    "fine-detail",
+    "fur-hair"
+   ],
+   "notes": "Pair of teal silk tassel earrings with turquoise beads and gold hooks, on a blue painted-wood background (blue on blue, fine fibres, thin hooks)",
+   "expected_no_change": false
+  },
+  {
+   "id": "chanel-no5-box-flowers",
+   "file": "chanel-no5-box-flowers.jpg",
+   "source": "https://www.pexels.com/photo/a-packaging-of-chanel-no-5-perfume-and-flowers-22589333/",
+   "download": "https://images.pexels.com/photos/22589333/pexels-photo-22589333.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "HARD",
+   "categories": [
+    "beauty"
+   ],
+   "conditions": [
+    "text-on-product",
+    "props",
+    "busy-scene"
+   ],
+   "notes": "Chanel N°5 perfume box (white box with black text). The roses and the mauve cushion or table are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "skincare-orange-packaging",
+   "file": "skincare-orange-packaging.jpg",
+   "source": "https://www.pexels.com/photo/skincare-products-in-orange-packaging-11599021/",
+   "download": "https://images.pexels.com/photos/11599021/pexels-photo-11599021.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "multiple-products"
+   ],
+   "conditions": [
+    "text-on-product",
+    "props"
+   ],
+   "notes": "Two frosted serum bottles with orange 'DERMATOLOGY' labels and the orange carton; the white square frame is a display prop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "medk8-cosmetic-box",
+   "file": "medk8-cosmetic-box.jpg",
+   "source": "https://www.pexels.com/photo/packaging-of-cosmetic-16038191/",
+   "download": "https://images.pexels.com/photos/16038191/pexels-photo-16038191.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "white-on-white"
+   ],
+   "conditions": [
+    "text-on-product",
+    "shadows",
+    "small-product"
+   ],
+   "notes": "Small white Medik8 C-Tetra Luxe carton lying on a grey-white surface with a strong diagonal shadow.",
+   "expected_no_change": false
+  },
+  {
+   "id": "iphone-box-unboxing",
+   "file": "iphone-box-unboxing.jpg",
+   "source": "https://www.pexels.com/photo/unboxing-iphone-15-pro-max-box-in-natural-titanium-color-mention-zana_qaradaghy-on-instagram-while-use-this-photo-follow-on-instagram-zana_qaradaghy-18525574/",
+   "download": "https://images.pexels.com/photos/18525574/pexels-photo-18525574.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "MEDIUM",
+   "categories": [
+    "electronics",
+    "multiple-products"
+   ],
+   "conditions": [
+    "text-on-product"
+   ],
+   "notes": "Flat lay of an iPhone 15 Pro Max set on light wood: box lid with 'iPhone' text on its edge, white inner tray, phone, sticker or document pack, USB-C cable (5 items).",
+   "expected_no_change": false
+  },
+  {
+   "id": "cosmetic-tube-leaves",
+   "file": "cosmetic-tube-leaves.jpg",
+   "source": "https://www.pexels.com/photo/cosmetic-product-in-a-plastic-tube-11010801/",
+   "download": "https://images.pexels.com/photos/11010801/pexels-photo-11010801.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "MEDIUM",
+   "categories": [
+    "beauty"
+   ],
+   "conditions": [
+    "text-on-product",
+    "props"
+   ],
+   "notes": "White HYSQIA 'Eveil des Seins' cosmetic tube with printed text; the pothos leaves are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "sports-tshirt-hanger",
+   "file": "sports-tshirt-hanger.jpg",
+   "source": "https://www.pexels.com/photo/man-holding-a-sports-t-shirt-on-a-clothes-hanger-18256104/",
+   "download": "https://images.pexels.com/photos/18256104/pexels-photo-18256104.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "text-on-product",
+    "on-model"
+   ],
+   "notes": "Chelsea FC football shirt with Nike, club-crest and sponsor logos, on a hanger held up by a hand.",
+   "expected_no_change": false
+  },
+  {
+   "id": "topo-chico-bottle",
+   "file": "topo-chico-bottle.jpg",
+   "source": "https://www.pexels.com/photo/bottle-of-carbonated-water-15763942/",
+   "download": "https://images.pexels.com/photos/15763942/pexels-photo-15763942.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "sweep-2026-09-27/text-packaging",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "text-on-product"
+   ],
+   "notes": "Clear 1.5 L Topo Chico PET bottle with a yellow label that wraps around it, on a near-white background.",
+   "expected_no_change": false
+  },
+  {
+   "id": "watch-wood",
+   "file": "watch-wood.jpg",
+   "source": "https://www.pexels.com/photo/round-silver-colored-and-white-analog-watch-with-white-rubber-band-on-brown-wooden-surface-173716/",
+   "download": "https://images.pexels.com/photos/173716/pexels-photo-173716.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "calibration",
+   "tier": "MEDIUM",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "props"
+   ],
+   "notes": "Wristwatch with white strap standing on a wooden table.",
+   "expected_no_change": false
+  },
+  {
+   "id": "necklace-stand",
+   "file": "necklace-stand.jpg",
+   "source": "https://www.pexels.com/photo/photo-of-gold-necklace-12194265/",
+   "download": "https://images.pexels.com/photos/12194265/pexels-photo-12194265.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "calibration",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "white-on-white"
+   ],
+   "conditions": [
+    "fine-detail",
+    "props"
+   ],
+   "notes": "Thin gold chain on a white display bust; the bust and white blocks are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "flatlay-shoes",
+   "file": "flatlay-shoes.jpg",
+   "source": "https://www.pexels.com/photo/brown-leather-brogue-shoes-beside-eyeglasses-and-watch-1619655/",
+   "download": "https://images.pexels.com/photos/1619655/pexels-photo-1619655.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "calibration",
+   "tier": "MEDIUM",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "props"
+   ],
+   "notes": "Brown brogues flat lay on navy, with a watch and glasses (a set, or props).",
+   "expected_no_change": false
+  },
+  {
+   "id": "clear-bottle-green-cap",
+   "file": "clear-bottle-green-cap.jpg",
+   "source": "https://www.pexels.com/photo/clear-glass-bottle-with-green-cap-3831748/",
+   "download": "https://images.pexels.com/photos/3831748/pexels-photo-3831748.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "calibration",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "transparent",
+    "white-on-white"
+   ],
+   "conditions": [
+    "multiple-products"
+   ],
+   "notes": "Empty clear spray bottle on white with its green cap lying beside it.",
+   "expected_no_change": false
+  },
+  {
+   "id": "yellow-sneakers-concrete",
+   "file": "yellow-sneakers-concrete.jpg",
+   "source": "https://www.pexels.com/photo/a-pair-of-beautiful-sneakers-on-the-floor-12740485/",
+   "download": "https://images.pexels.com/photos/12740485/pexels-photo-12740485.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "calibration",
+   "tier": "MEDIUM",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [],
+   "notes": "Pair of yellow suede sneakers on concrete (the calibration photo was a square crop of this).",
+   "expected_no_change": false
+  },
+  {
+   "id": "beats-headphones-table",
+   "file": "beats-headphones-table.jpg",
+   "source": "https://www.pexels.com/photo/modern-headphones-on-table-in-house-room-7241444/",
+   "download": "https://images.pexels.com/photos/7241444/pexels-photo-7241444.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "calibration",
+   "tier": "MEDIUM",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Dark over-ear headphones on a wooden table, rug below (the calibration photo was a square crop of this).",
+   "expected_no_change": false
+  },
+  {
+   "id": "sneakers-floating-studio",
+   "file": "sneakers-floating-studio.jpg",
+   "source": "https://www.pexels.com/photo/photo-of-sneakers-on-white-background-2529148/",
+   "download": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Pair of running shoes floating over a light grey studio backdrop, soft shadow below.",
+   "expected_no_change": false
+  },
+  {
+   "id": "red-sneakers-white",
+   "file": "red-sneakers-white.jpg",
+   "source": "https://www.pexels.com/photo/bright-red-sneakers-on-white-background-31688982/",
+   "download": "https://images.pexels.com/photos/31688982/pexels-photo-31688982.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [],
+   "notes": "Pair of red leather sneakers with white laces on a light grey-white backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "camera-mirrorless-white",
+   "file": "camera-mirrorless-white.jpg",
+   "source": "https://www.pexels.com/photo/professional-camera-on-white-background-11486464/",
+   "download": "https://images.pexels.com/photos/11486464/pexels-photo-11486464.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "text-on-product"
+   ],
+   "notes": "Mirrorless camera with zoom lens on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-headphones-yellow",
+   "file": "white-headphones-yellow.jpg",
+   "source": "https://www.pexels.com/photo/white-headphones-on-yellow-background-7054718/",
+   "download": "https://images.pexels.com/photos/7054718/pexels-photo-7054718.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "electronics"
+   ],
+   "conditions": [
+    "fine-detail"
+   ],
+   "notes": "White wired headphones on a yellow backdrop; the thin cable is part of the product.",
+   "expected_no_change": false
+  },
+  {
+   "id": "rangefinder-camera-white",
+   "file": "rangefinder-camera-white.jpg",
+   "source": "https://www.pexels.com/photo/retro-photo-camera-on-table-7162551/",
+   "download": "https://images.pexels.com/photos/7162551/pexels-photo-7162551.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "electronics"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Vintage rangefinder camera from above on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "pentax-camera-strap",
+   "file": "pentax-camera-strap.jpg",
+   "source": "https://www.pexels.com/photo/black-and-gray-pentax-bridge-camera-on-white-surface-821651/",
+   "download": "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "fine-detail",
+    "small-product"
+   ],
+   "notes": "Black camera with a red strap on a white surface, product small in the frame.",
+   "expected_no_change": false
+  },
+  {
+   "id": "green-chair-studio",
+   "file": "green-chair-studio.jpg",
+   "source": "https://www.pexels.com/photo/empty-chair-in-minimalist-studio-14391920/",
+   "download": "https://images.pexels.com/photos/14391920/pexels-photo-14391920.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Retro wooden chair with green seat in a grey studio.",
+   "expected_no_change": false
+  },
+  {
+   "id": "wooden-stool-white",
+   "file": "wooden-stool-white.jpg",
+   "source": "https://www.pexels.com/photo/photo-of-a-wooden-stool-chair-11112743/",
+   "download": "https://images.pexels.com/photos/11112743/pexels-photo-11112743.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [],
+   "notes": "Rustic wooden stool with blue-painted legs on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "lipstick-compact-white",
+   "file": "lipstick-compact-white.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photo-of-pink-lipstick-and-blush-on-2533266/",
+   "download": "https://images.pexels.com/photos/2533266/pexels-photo-2533266.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "beauty",
+    "multiple-products"
+   ],
+   "conditions": [
+    "reflections"
+   ],
+   "notes": "Pink lipstick and an open blush compact (mirror) on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "lip-gloss-white",
+   "file": "lip-gloss-white.jpg",
+   "source": "https://www.pexels.com/photo/a-pink-lipstick-with-a-white-background-27525348/",
+   "download": "https://images.pexels.com/photos/27525348/pexels-photo-27525348.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "beauty",
+    "transparent"
+   ],
+   "conditions": [
+    "text-on-product"
+   ],
+   "notes": "Pink lip gloss tube lying diagonally on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "toy-figure-white",
+   "file": "toy-figure-white.jpg",
+   "source": "https://www.pexels.com/photo/isolated-plastic-evil-creature-toy-7772538/",
+   "download": "https://images.pexels.com/photos/7772538/pexels-photo-7772538.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "toys"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Small brown plastic toy figure on a white-pink backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "espresso-cup-saucer",
+   "file": "espresso-cup-saucer.jpg",
+   "source": "https://www.pexels.com/photo/white-ceramic-mug-and-saucer-685527/",
+   "download": "https://images.pexels.com/photos/685527/pexels-photo-685527.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "EASY",
+   "categories": [
+    "kitchen"
+   ],
+   "conditions": [],
+   "notes": "White espresso cup on a saucer on dark blue-grey wood.",
+   "expected_no_change": false
+  },
+  {
+   "id": "perfume-red-cap-white",
+   "file": "perfume-red-cap-white.jpg",
+   "source": "https://www.pexels.com/photo/a-clear-glass-perfume-bottle-with-brown-lid-on-white-surface-4735929/",
+   "download": "https://images.pexels.com/photos/4735929/pexels-photo-4735929.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [],
+   "notes": "Square clear perfume bottle with a dark red cap on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "lip-gloss-box-pink",
+   "file": "lip-gloss-box-pink.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photo-of-pink-lip-gloss-3373740/",
+   "download": "https://images.pexels.com/photos/3373740/pexels-photo-3373740.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "beauty",
+    "multiple-products"
+   ],
+   "conditions": [
+    "similar-colours"
+   ],
+   "notes": "Pink lip gloss and its pale pink box on a pink backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "three-cameras-white",
+   "file": "three-cameras-white.jpg",
+   "source": "https://www.pexels.com/photo/cameras-on-white-background-4397899/",
+   "download": "https://images.pexels.com/photos/4397899/pexels-photo-4397899.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "electronics",
+    "multiple-products",
+    "dark-products"
+   ],
+   "conditions": [
+    "props",
+    "small-product"
+   ],
+   "notes": "Three vintage cameras on white, one on a stack of books (prop).",
+   "expected_no_change": false
+  },
+  {
+   "id": "black-tshirt-hanger-shadow",
+   "file": "black-tshirt-hanger-shadow.jpg",
+   "source": "https://www.pexels.com/photo/a-black-shirt-hanging-on-the-wall-8532616/",
+   "download": "https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing",
+    "dark-products"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Black T-shirt on a hanger against a white wall with a hard window shadow.",
+   "expected_no_change": false
+  },
+  {
+   "id": "mesh-watch-white-fabric",
+   "file": "mesh-watch-white-fabric.jpg",
+   "source": "https://www.pexels.com/photo/silver-wristwatch-on-white-background-20118030/",
+   "download": "https://images.pexels.com/photos/20118030/pexels-photo-20118030.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "similar-colours",
+    "reflections"
+   ],
+   "notes": "Silver mesh-strap watch lying on white fabric folds.",
+   "expected_no_change": false
+  },
+  {
+   "id": "two-mugs-marble-plant",
+   "file": "two-mugs-marble-plant.jpg",
+   "source": "https://www.pexels.com/photo/ceramic-cups-on-marble-table-4466240/",
+   "download": "https://images.pexels.com/photos/4466240/pexels-photo-4466240.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "kitchen",
+    "multiple-products"
+   ],
+   "conditions": [
+    "props",
+    "touching-edge"
+   ],
+   "notes": "Two patterned ceramic mugs on marble; plant leaves at the left edge are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "armchair-orange-cushion",
+   "file": "armchair-orange-cushion.jpg",
+   "source": "https://www.pexels.com/photo/armchair-in-corner-of-room-5490306/",
+   "download": "https://images.pexels.com/photos/5490306/pexels-photo-5490306.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "busy-scene",
+    "shadows"
+   ],
+   "notes": "Wooden armchair with grey seat and orange cushion in a room corner.",
+   "expected_no_change": false
+  },
+  {
+   "id": "table-lamp-nightstand",
+   "file": "table-lamp-nightstand.jpg",
+   "source": "https://www.pexels.com/photo/white-and-silver-table-lamp-1176516/",
+   "download": "https://images.pexels.com/photos/1176516/pexels-photo-1176516.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "home-decor",
+    "furniture"
+   ],
+   "conditions": [
+    "busy-scene",
+    "props",
+    "similar-colours"
+   ],
+   "notes": "Table lamp on a mirrored nightstand beside a bed; the product is the lamp (or lamp + nightstand).",
+   "expected_no_change": false
+  },
+  {
+   "id": "hoodies-on-rack",
+   "file": "hoodies-on-rack.jpg",
+   "source": "https://www.pexels.com/photo/hoodie-sweaters-hanged-on-a-clothes-rack-9594679/",
+   "download": "https://images.pexels.com/photos/9594679/pexels-photo-9594679.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing",
+    "multiple-products"
+   ],
+   "conditions": [
+    "touching-edge",
+    "props"
+   ],
+   "notes": "Two pastel hoodies on hangers on a black rack, cut by the photo's edges.",
+   "expected_no_change": false
+  },
+  {
+   "id": "outfit-flatlay-white",
+   "file": "outfit-flatlay-white.jpg",
+   "source": "https://www.pexels.com/photo/clothes-and-a-boot-on-white-surface-8408556/",
+   "download": "https://images.pexels.com/photos/8408556/pexels-photo-8408556.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "clothing",
+    "shoes",
+    "multiple-products",
+    "white-on-white"
+   ],
+   "conditions": [],
+   "notes": "Flat lay on white: grey jeans, white T-shirt, one boot.",
+   "expected_no_change": false
+  },
+  {
+   "id": "headphones-camera-flatlay",
+   "file": "headphones-camera-flatlay.jpg",
+   "source": "https://www.pexels.com/photo/a-black-headphones-on-a-wooden-table-11340544/",
+   "download": "https://images.pexels.com/photos/11340544/pexels-photo-11340544.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "props",
+    "touching-edge"
+   ],
+   "notes": "Black headphones on wood; a camera and a plant cut by the edges are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "watch-beside-mug",
+   "file": "watch-beside-mug.jpg",
+   "source": "https://www.pexels.com/photo/photo-of-a-wristwatch-beside-a-cup-of-coffee-12518204/",
+   "download": "https://images.pexels.com/photos/12518204/pexels-photo-12518204.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "props",
+    "touching-edge",
+    "busy-scene"
+   ],
+   "notes": "Wristwatch on a wooden table beside a mug and a book (props cut by the edges).",
+   "expected_no_change": false
+  },
+  {
+   "id": "tote-bag-yellow-wall",
+   "file": "tote-bag-yellow-wall.jpg",
+   "source": "https://www.pexels.com/photo/two-white-ceramic-mugs-and-a-white-bag-on-wooden-table-3551355/",
+   "download": "https://images.pexels.com/photos/3551355/pexels-photo-3551355.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "bags"
+   ],
+   "conditions": [
+    "props",
+    "busy-scene"
+   ],
+   "notes": "Canvas tote bag with flowers on a table against a yellow wall; mug and plant are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "blue-perfume-starfish",
+   "file": "blue-perfume-starfish.jpg",
+   "source": "https://www.pexels.com/photo/clear-glass-perfume-bottle-with-white-background-3640668/",
+   "download": "https://images.pexels.com/photos/3640668/pexels-photo-3640668.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "props"
+   ],
+   "notes": "Pale blue perfume bottle with black cap on white; starfish are props.",
+   "expected_no_change": false
+  },
+  {
+   "id": "perfume-dried-flower",
+   "file": "perfume-dried-flower.jpg",
+   "source": "https://www.pexels.com/photo/clear-glass-perfume-bottle-1190829/",
+   "download": "https://images.pexels.com/photos/1190829/pexels-photo-1190829.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "props"
+   ],
+   "notes": "Amber perfume bottle with a dried flower (prop) on a white-lilac backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "toy-vehicles-white-sheet",
+   "file": "toy-vehicles-white-sheet.jpg",
+   "source": "https://www.pexels.com/photo/toys-on-a-white-background-5257291/",
+   "download": "https://images.pexels.com/photos/5257291/pexels-photo-5257291.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "toys",
+    "multiple-products"
+   ],
+   "conditions": [
+    "small-product"
+   ],
+   "notes": "Two small toy vehicles on a creased white sheet.",
+   "expected_no_change": false
+  },
+  {
+   "id": "wooden-chair-dark",
+   "file": "wooden-chair-dark.jpg",
+   "source": "https://www.pexels.com/photo/wooden-chair-on-black-background-15365731/",
+   "download": "https://images.pexels.com/photos/15365731/pexels-photo-15365731.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "touching-edge",
+    "low-light"
+   ],
+   "notes": "Wooden armchair against a dark wall, arm cut by the right edge.",
+   "expected_no_change": false
+  },
+  {
+   "id": "small-chair-white-studio",
+   "file": "small-chair-white-studio.jpg",
+   "source": "https://www.pexels.com/photo/wooden-chair-on-a-white-wall-studio-963486/",
+   "download": "https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "furniture",
+    "dark-products"
+   ],
+   "conditions": [
+    "small-product",
+    "fine-detail"
+   ],
+   "notes": "Dark green chair small in a white studio room.",
+   "expected_no_change": false
+  },
+  {
+   "id": "bentwood-chair-white-room",
+   "file": "bentwood-chair-white-room.jpg",
+   "source": "https://www.pexels.com/photo/brown-wooden-chair-beside-white-wall-7193706/",
+   "download": "https://images.pexels.com/photos/7193706/pexels-photo-7193706.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "fine-detail",
+    "small-product"
+   ],
+   "notes": "Bentwood chair with thin legs in a white room.",
+   "expected_no_change": false
+  },
+  {
+   "id": "wine-bottle-and-glass",
+   "file": "wine-bottle-and-glass.jpg",
+   "source": "https://www.pexels.com/photo/elegant-red-wine-bottle-and-glass-on-minimalist-background-28919553/",
+   "download": "https://images.pexels.com/photos/28919553/pexels-photo-28919553.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "MEDIUM",
+   "categories": [
+    "bottles",
+    "transparent",
+    "multiple-products",
+    "dark-products"
+   ],
+   "conditions": [
+    "touching-edge"
+   ],
+   "notes": "Dark wine bottle and a glass of red wine on a light backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "blue-perfume-shadow-stripes",
+   "file": "blue-perfume-shadow-stripes.jpg",
+   "source": "https://www.pexels.com/photo/elegant-blue-glass-perfume-bottle-in-minimalist-setting-30990130/",
+   "download": "https://images.pexels.com/photos/30990130/pexels-photo-30990130.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "shadows",
+    "text-on-product"
+   ],
+   "notes": "Aqua glass perfume bottle with striped light and shadow behind it.",
+   "expected_no_change": false
+  },
+  {
+   "id": "red-wine-glass-white",
+   "file": "red-wine-glass-white.jpg",
+   "source": "https://www.pexels.com/photo/glass-of-wine-in-white-background-7597560/",
+   "download": "https://images.pexels.com/photos/7597560/pexels-photo-7597560.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "kitchen",
+    "transparent"
+   ],
+   "conditions": [],
+   "notes": "Wine glass half full of red wine on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "wine-glass-hard-shadow",
+   "file": "wine-glass-hard-shadow.jpg",
+   "source": "https://www.pexels.com/photo/clear-wine-glass-6481629/",
+   "download": "https://images.pexels.com/photos/6481629/pexels-photo-6481629.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "kitchen",
+    "transparent"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Empty wine glass with water on white, hard shadow on a grey card.",
+   "expected_no_change": false
+  },
+  {
+   "id": "champagne-glass-shadow",
+   "file": "champagne-glass-shadow.jpg",
+   "source": "https://www.pexels.com/photo/white-wine-in-a-clear-glass-7283407/",
+   "download": "https://images.pexels.com/photos/7283407/pexels-photo-7283407.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "kitchen",
+    "transparent"
+   ],
+   "conditions": [
+    "shadows"
+   ],
+   "notes": "Champagne flute on white with its long cast shadow.",
+   "expected_no_change": false
+  },
+  {
+   "id": "hyacinth-glass-vase",
+   "file": "hyacinth-glass-vase.jpg",
+   "source": "https://www.pexels.com/photo/photography-of-white-flower-on-clear-glass-vase-735091/",
+   "download": "https://images.pexels.com/photos/735091/pexels-photo-735091.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "home-decor",
+    "transparent"
+   ],
+   "conditions": [
+    "fine-detail",
+    "props"
+   ],
+   "notes": "White hyacinth bulb in a clear glass vase (roots visible) on a light backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-mug-white-table",
+   "file": "white-mug-white-table.jpg",
+   "source": "https://www.pexels.com/photo/a-white-ceramic-mug-on-a-white-surface-11075707/",
+   "download": "https://images.pexels.com/photos/11075707/pexels-photo-11075707.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "kitchen",
+    "white-on-white"
+   ],
+   "conditions": [
+    "similar-colours"
+   ],
+   "notes": "Plain white mug on a white table, green-grey wall behind.",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-pump-bottle-leaves",
+   "file": "white-pump-bottle-leaves.jpg",
+   "source": "https://www.pexels.com/photo/bottle-of-nourishing-cream-on-white-table-5798000/",
+   "download": "https://images.pexels.com/photos/5798000/pexels-photo-5798000.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "white-on-white"
+   ],
+   "conditions": [
+    "props",
+    "busy-scene"
+   ],
+   "notes": "White pump bottle and a small jar on white, blurred leaves in front.",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-sneakers-white-floor",
+   "file": "white-sneakers-white-floor.jpg",
+   "source": "https://www.pexels.com/photo/white-shoes-on-floor-7193634/",
+   "download": "https://images.pexels.com/photos/7193634/pexels-photo-7193634.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "white-on-white",
+    "multiple-products"
+   ],
+   "conditions": [
+    "touching-edge"
+   ],
+   "notes": "Pair of white sneakers on a white floor, cut by the top edge.",
+   "expected_no_change": false
+  },
+  {
+   "id": "sneaker-closeup-cut",
+   "file": "sneaker-closeup-cut.jpg",
+   "source": "https://www.pexels.com/photo/close-up-of-shoes-against-white-background-256649/",
+   "download": "https://images.pexels.com/photos/256649/pexels-photo-256649.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "touching-edge",
+    "reflections"
+   ],
+   "notes": "Close-up of two sneakers cut by the frame, on a glossy white floor with reflections.",
+   "expected_no_change": false
+  },
+  {
+   "id": "white-nike-red-cut",
+   "file": "white-nike-red-cut.jpg",
+   "source": "https://www.pexels.com/photo/white-shoe-on-red-background-18212364/",
+   "download": "https://images.pexels.com/photos/18212364/pexels-photo-18212364.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "shoes"
+   ],
+   "conditions": [
+    "touching-edge",
+    "shadows"
+   ],
+   "notes": "White sneaker on red-orange light, heel cut by the left edge.",
+   "expected_no_change": false
+  },
+  {
+   "id": "spray-trigger-cut",
+   "file": "spray-trigger-cut.jpg",
+   "source": "https://www.pexels.com/photo/white-and-green-spray-bottle-12997255/",
+   "download": "https://images.pexels.com/photos/12997255/pexels-photo-12997255.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "touching-edge"
+   ],
+   "notes": "Green spray bottle close-up, cut by the bottom edge.",
+   "expected_no_change": false
+  },
+  {
+   "id": "disco-ball-sunlight",
+   "file": "disco-ball-sunlight.jpg",
+   "source": "https://www.pexels.com/photo/silver-ball-on-white-surface-8452844/",
+   "download": "https://images.pexels.com/photos/8452844/pexels-photo-8452844.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "home-decor"
+   ],
+   "conditions": [
+    "reflections",
+    "shadows"
+   ],
+   "notes": "Mirror disco ball on a white floor in sunlight, sparkles and hard shadows.",
+   "expected_no_change": false
+  },
+  {
+   "id": "green-spray-bottle-mirror",
+   "file": "green-spray-bottle-mirror.jpg",
+   "source": "https://www.pexels.com/photo/green-spray-bottle-in-close-up-photography-7530721/",
+   "download": "https://images.pexels.com/photos/7530721/pexels-photo-7530721.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "reflections",
+    "text-on-product"
+   ],
+   "notes": "Green translucent spray bottle leaning on a mirror (its reflection is not a product).",
+   "expected_no_change": false
+  },
+  {
+   "id": "green-bottle-splash-green",
+   "file": "green-bottle-splash-green.jpg",
+   "source": "https://www.pexels.com/photo/green-glass-bottle-with-water-splash-11628564/",
+   "download": "https://images.pexels.com/photos/11628564/pexels-photo-11628564.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "similar-colours",
+    "fine-detail"
+   ],
+   "notes": "Green glass bottle with a water splash on a green backdrop.",
+   "expected_no_change": false
+  },
+  {
+   "id": "green-perfume-dark",
+   "file": "green-perfume-dark.jpg",
+   "source": "https://www.pexels.com/photo/close-up-shot-of-a-green-perfume-bottle-on-glass-surface-14402559/",
+   "download": "https://images.pexels.com/photos/14402559/pexels-photo-14402559.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "bottles",
+    "dark-products",
+    "transparent"
+   ],
+   "conditions": [
+    "low-light",
+    "small-product"
+   ],
+   "notes": "Dark green perfume bottle in a very dark scene.",
+   "expected_no_change": false
+  },
+  {
+   "id": "headphones-dim-desk",
+   "file": "headphones-dim-desk.jpg",
+   "source": "https://www.pexels.com/photo/black-headphones-on-the-table-8414344/",
+   "download": "https://images.pexels.com/photos/8414344/pexels-photo-8414344.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "low-light",
+    "busy-scene"
+   ],
+   "notes": "Black headphones on a dark desk in dim light, keyboard at the edge.",
+   "expected_no_change": false
+  },
+  {
+   "id": "watch-dark-sparkles",
+   "file": "watch-dark-sparkles.jpg",
+   "source": "https://www.pexels.com/photo/close-up-of-wristwatch-17107834/",
+   "download": "https://images.pexels.com/photos/17107834/pexels-photo-17107834.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "dark-products"
+   ],
+   "conditions": [
+    "reflections",
+    "busy-scene",
+    "small-product"
+   ],
+   "notes": "Steel watch on dark glittering beads.",
+   "expected_no_change": false
+  },
+  {
+   "id": "sneaker-store-wall",
+   "file": "sneaker-store-wall.jpg",
+   "source": "https://www.pexels.com/photo/store-display-with-nike-sneakers-19294576/",
+   "download": "https://images.pexels.com/photos/19294576/pexels-photo-19294576.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "busy-scene",
+    "touching-edge"
+   ],
+   "notes": "Store wall of many sneakers on shelves: no single product.",
+   "expected_no_change": false
+  },
+  {
+   "id": "headphones-stand-room",
+   "file": "headphones-stand-room.jpg",
+   "source": "https://www.pexels.com/photo/close-up-of-headphones-on-table-8799689/",
+   "download": "https://images.pexels.com/photos/8799689/pexels-photo-8799689.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "busy-scene",
+    "props"
+   ],
+   "notes": "Headphones on a stand on a cluttered desk in a room.",
+   "expected_no_change": false
+  },
+  {
+   "id": "ring-held-fingers",
+   "file": "ring-held-fingers.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photo-of-person-holding-a-gold-ring-6262842/",
+   "download": "https://images.pexels.com/photos/6262842/pexels-photo-6262842.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "on-model",
+    "small-product",
+    "low-light"
+   ],
+   "notes": "Gold ring held between fingers over a stone, dark background.",
+   "expected_no_change": false
+  },
+  {
+   "id": "tiny-gold-ring-white-fabric",
+   "file": "tiny-gold-ring-white-fabric.jpg",
+   "source": "https://www.pexels.com/photo/golden-ring-on-white-background-10581426/",
+   "download": "https://images.pexels.com/photos/10581426/pexels-photo-10581426.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "white-on-white"
+   ],
+   "conditions": [
+    "small-product"
+   ],
+   "notes": "Tiny gold ring on white fabric, very small in the frame.",
+   "expected_no_change": false
+  },
+  {
+   "id": "gold-rings-stone",
+   "file": "gold-rings-stone.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photo-of-golden-rings-1670723/",
+   "download": "https://images.pexels.com/photos/1670723/pexels-photo-1670723.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "jewelry",
+    "multiple-products"
+   ],
+   "conditions": [
+    "busy-scene",
+    "reflections"
+   ],
+   "notes": "Two gold rings on a stone ledge, blurred green background.",
+   "expected_no_change": false
+  },
+  {
+   "id": "perfume-pink-white-shadows",
+   "file": "perfume-pink-white-shadows.jpg",
+   "source": "https://www.pexels.com/photo/bottle-of-perfume-on-a-white-and-pink-background-12563417/",
+   "download": "https://images.pexels.com/photos/12563417/pexels-photo-12563417.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "shadows",
+    "props",
+    "text-on-product"
+   ],
+   "notes": "Clear perfume bottle on a pink/white split backdrop with hard shadows and a flower.",
+   "expected_no_change": false
+  },
+  {
+   "id": "perfume-black-pine",
+   "file": "perfume-black-pine.jpg",
+   "source": "https://www.pexels.com/photo/clear-glass-perfume-bottle-on-green-leaves-and-white-flower-3989394/",
+   "download": "https://images.pexels.com/photos/3989394/pexels-photo-3989394.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "bottles",
+    "transparent"
+   ],
+   "conditions": [
+    "props",
+    "text-on-product"
+   ],
+   "notes": "Clear perfume bottle on black among pine branches and a white flower.",
+   "expected_no_change": false
+  },
+  {
+   "id": "lipstick-vanity-mirror",
+   "file": "lipstick-vanity-mirror.jpg",
+   "source": "https://www.pexels.com/photo/pink-lipstick-1213558/",
+   "download": "https://images.pexels.com/photos/1213558/pexels-photo-1213558.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "multiple-products"
+   ],
+   "conditions": [
+    "reflections",
+    "busy-scene"
+   ],
+   "notes": "Lipstick and makeup on a vanity with a mirror and window.",
+   "expected_no_change": false
+  },
+  {
+   "id": "chest-of-drawers-room",
+   "file": "chest-of-drawers-room.jpg",
+   "source": "https://www.pexels.com/photo/cozy-room-with-armchair-and-cabinet-5997975/",
+   "download": "https://images.pexels.com/photos/5997975/pexels-photo-5997975.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "busy-scene",
+    "props"
+   ],
+   "notes": "Wooden chest of drawers in a room with a sofa, floor lamp and flowers.",
+   "expected_no_change": false
+  },
+  {
+   "id": "boots-on-feet-bw",
+   "file": "boots-on-feet-bw.jpg",
+   "source": "https://www.pexels.com/photo/black-and-white-nike-sneakers-on-gray-concrete-floor-10588226/",
+   "download": "https://images.pexels.com/photos/10588226/pexels-photo-10588226.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "dark-products",
+    "multiple-products"
+   ],
+   "conditions": [
+    "on-model",
+    "touching-edge"
+   ],
+   "notes": "Black-and-white photo looking down at worn shoes on paving.",
+   "expected_no_change": false
+  },
+  {
+   "id": "blonde-hairpiece-mannequin",
+   "file": "blonde-hairpiece-mannequin.jpg",
+   "source": "https://www.pexels.com/photo/a-blonde-hair-piece-on-a-mannequin-head-18614263/",
+   "download": "https://images.pexels.com/photos/18614263/pexels-photo-18614263.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "beauty",
+    "white-on-white"
+   ],
+   "conditions": [
+    "fur-hair",
+    "fine-detail"
+   ],
+   "notes": "Blonde hair piece hanging from a white mannequin hand on white.",
+   "expected_no_change": false
+  },
+  {
+   "id": "teapot-glass-table-room",
+   "file": "teapot-glass-table-room.jpg",
+   "source": "https://www.pexels.com/photo/teapot-with-ceramic-cups-in-living-room-6394595/",
+   "download": "https://images.pexels.com/photos/6394595/pexels-photo-6394595.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "origin": "new",
+   "tier": "HARD",
+   "categories": [
+    "kitchen",
+    "multiple-products"
+   ],
+   "conditions": [
+    "reflections",
+    "busy-scene"
+   ],
+   "notes": "Teapot and cups on a glass table in a living room.",
+   "expected_no_change": false
+  },
+  {
+   "id": "watermark-camera",
+   "file": "watermark-camera.jpg",
+   "source": "https://www.pexels.com/photo/professional-camera-on-white-background-11486464/",
+   "derive": {
+    "from": "camera-mirrorless-white",
+    "ops": [
+     {
+      "op": "watermark",
+      "text": "© SAMPLE STORE",
+      "opacity": 0.55,
+      "angle": 20,
+      "size": 0.09,
+      "color": "#FFFFFF",
+      "center": [
+       0.5,
+       0.52
+      ]
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "HARD",
+   "categories": [
+    "electronics",
+    "dark-products"
+   ],
+   "conditions": [
+    "watermark"
+   ],
+   "notes": "The camera photo with a white semi-transparent watermark across the product and the background.",
+   "expected_no_change": false
+  },
+  {
+   "id": "watermark-sneakers-tiled",
+   "file": "watermark-sneakers-tiled.jpg",
+   "source": "https://www.pexels.com/photo/photo-of-sneakers-on-white-background-2529148/",
+   "derive": {
+    "from": "sneakers-floating-studio",
+    "ops": [
+     {
+      "op": "watermark",
+      "text": "stockphoto",
+      "opacity": 0.35,
+      "angle": 30,
+      "size": 0.05,
+      "color": "#404040",
+      "tile": true,
+      "tile_dx": 7,
+      "tile_dy": 3
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "HARD",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "watermark"
+   ],
+   "notes": "The floating sneakers with a tiled dark-grey stock watermark over everything.",
+   "expected_no_change": false
+  },
+  {
+   "id": "done-derby-shoes",
+   "file": "done-derby-shoes.jpg",
+   "source": "https://www.pexels.com/photo/pair-of-black-leather-derby-shoes-placed-on-brown-surface-292998/",
+   "repo_file": "public/examples/derby-shoes-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "shoes",
+    "multiple-products",
+    "dark-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-minimal-watch",
+   "file": "done-minimal-watch.jpg",
+   "source": "https://www.pexels.com/photo/round-gold-analog-watch-with-brown-leather-strap-5058216/",
+   "repo_file": "public/examples/minimal-watch-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-amber-bottles",
+   "file": "done-amber-bottles.jpg",
+   "source": "https://www.pexels.com/photo/amber-dispenser-and-dropper-bottle-7795400/",
+   "repo_file": "public/examples/amber-bottles-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "beauty",
+    "bottles",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-wooden-cars",
+   "file": "done-wooden-cars.jpg",
+   "source": "https://www.pexels.com/photo/yellow-and-blue-wooden-toy-cars-6865340/",
+   "repo_file": "public/examples/wooden-cars-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "toys",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-copper-teapot",
+   "file": "done-copper-teapot.jpg",
+   "source": "https://www.pexels.com/photo/antique-teapot-in-a-kitchen-18500924/",
+   "repo_file": "public/examples/copper-teapot-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "kitchen"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-green-candle",
+   "file": "done-green-candle.jpg",
+   "source": "https://www.pexels.com/photo/6311870/",
+   "repo_file": "public/examples/green-candle-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "home-decor"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-stacked-bowls",
+   "file": "done-stacked-bowls.jpg",
+   "source": "https://www.pexels.com/photo/ceramic-decorative-bowls-and-plates-on-a-table-8251778/",
+   "repo_file": "public/examples/stacked-bowls-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "kitchen",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-leather-bag",
+   "file": "done-leather-bag.jpg",
+   "source": "https://www.pexels.com/photo/leather-messenger-bag-on-park-bench-in-autumn-29464416/",
+   "repo_file": "public/examples/leather-bag-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "bags"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-glass-carafe",
+   "file": "done-glass-carafe.jpg",
+   "source": "https://www.pexels.com/photo/coffee-in-a-glass-carafe-with-sunlit-shadows-29162416/",
+   "repo_file": "public/examples/glass-carafe-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "kitchen",
+    "transparent"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-rocket",
+   "file": "done-rocket.jpg",
+   "source": "https://www.pexels.com/photo/7355365/",
+   "repo_file": "public/examples/rocket-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "toys"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output for this photo (pipeline 2026-09-27.2): square, pure white, product centred with 8% margin on its limiting side.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-rattan-chair-src",
+   "file": "done-rattan-chair-src.jpg",
+   "source": "https://www.pexels.com/photo/potted-plant-and-chair-on-balcony-5028853/",
+   "repo_file": "public/examples/rattan-chair-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output (pipeline 2026-09-27.2), also the source of an 'almost' variant.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-sunglasses-src",
+   "file": "done-sunglasses-src.jpg",
+   "source": "https://www.pexels.com/photo/two-eyewear-on-white-surface-1499477/",
+   "repo_file": "public/examples/sunglasses-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "clothing",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output (pipeline 2026-09-27.2), also the source of an 'almost' variant.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-tassel-earrings-src",
+   "file": "done-tassel-earrings-src.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photography-of-blue-earrings-1413420/",
+   "repo_file": "public/examples/tassel-earrings-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "jewelry",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output (pipeline 2026-09-27.2), also the source of an 'almost' variant.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-hoodie-model-src",
+   "file": "done-hoodie-model-src.jpg",
+   "source": "https://www.pexels.com/photo/black-man-in-hoodie-near-gray-wall-6311488/",
+   "repo_file": "public/examples/hoodie-model-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output (pipeline 2026-09-27.2), also the source of an 'almost' variant.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-bridal-heels-src",
+   "file": "done-bridal-heels-src.jpg",
+   "source": "https://www.pexels.com/photo/beige-high-heeled-sandals-2085527/",
+   "repo_file": "public/examples/bridal-heels-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output (pipeline 2026-09-27.2), also the source of an 'almost' variant.",
+   "expected_no_change": true
+  },
+  {
+   "id": "done-gold-necklace-src",
+   "file": "done-gold-necklace-src.jpg",
+   "source": "https://www.pexels.com/photo/a-necklace-on-a-white-background-7134458/",
+   "repo_file": "public/examples/gold-necklace-after.jpg",
+   "origin": "padly-output",
+   "tier": "EASY",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "already-processed"
+   ],
+   "notes": "Padly's landing-page output (pipeline 2026-09-27.2), also the source of an 'almost' variant.",
+   "expected_no_change": true
+  },
+  {
+   "id": "almost-offcentre-rattan-chair",
+   "file": "almost-offcentre-rattan-chair.jpg",
+   "source": "https://www.pexels.com/photo/potted-plant-and-chair-on-balcony-5028853/",
+   "derive": {
+    "from": "done-rattan-chair-src",
+    "ops": [
+     {
+      "op": "shift",
+      "dx": 0.12,
+      "dy": 0.0,
+      "fill": "#FFFFFF"
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "EASY",
+   "categories": [
+    "furniture"
+   ],
+   "conditions": [
+    "already-processed",
+    "almost-done"
+   ],
+   "notes": "Already processed, then shifted 12% right: square and white, but off-centre (8% margin on the right, 31% on the left).",
+   "expected_no_change": false
+  },
+  {
+   "id": "almost-4x5-sunglasses",
+   "file": "almost-4x5-sunglasses.jpg",
+   "source": "https://www.pexels.com/photo/two-eyewear-on-white-surface-1499477/",
+   "derive": {
+    "from": "done-sunglasses-src",
+    "ops": [
+     {
+      "op": "pad_to_aspect",
+      "aspect": "4:5",
+      "fill": "#FFFFFF"
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "EASY",
+   "categories": [
+    "clothing",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed",
+    "almost-done"
+   ],
+   "notes": "Already processed, then padded with white to 4:5: centred and white, but not square.",
+   "expected_no_change": false
+  },
+  {
+   "id": "almost-tight-tassel-earrings",
+   "file": "almost-tight-tassel-earrings.jpg",
+   "source": "https://www.pexels.com/photo/close-up-photography-of-blue-earrings-1413420/",
+   "derive": {
+    "from": "done-tassel-earrings-src",
+    "ops": [
+     {
+      "op": "crop",
+      "box": [
+       0.066,
+       0.066,
+       0.934,
+       0.934
+      ]
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "EASY",
+   "categories": [
+    "jewelry",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed",
+    "almost-done"
+   ],
+   "notes": "Already processed, then cropped: square and white, but the product nearly touches the left and right edges (about 1% margin).",
+   "expected_no_change": false
+  },
+  {
+   "id": "almost-cream-bg-hoodie",
+   "file": "almost-cream-bg-hoodie.jpg",
+   "source": "https://www.pexels.com/photo/black-man-in-hoodie-near-gray-wall-6311488/",
+   "derive": {
+    "from": "done-hoodie-model-src",
+    "ops": [
+     {
+      "op": "recolor_background",
+      "color": "#F2E8D5",
+      "min": 248
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "EASY",
+   "categories": [
+    "clothing"
+   ],
+   "conditions": [
+    "already-processed",
+    "almost-done"
+   ],
+   "notes": "Already processed, then the white background replaced with cream (#F2E8D5).",
+   "expected_no_change": false
+  },
+  {
+   "id": "almost-light-grey-bridal-heels",
+   "file": "almost-light-grey-bridal-heels.jpg",
+   "source": "https://www.pexels.com/photo/beige-high-heeled-sandals-2085527/",
+   "derive": {
+    "from": "done-bridal-heels-src",
+    "ops": [
+     {
+      "op": "recolor_background",
+      "color": "#EDEDED",
+      "min": 248
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "EASY",
+   "categories": [
+    "shoes",
+    "multiple-products"
+   ],
+   "conditions": [
+    "already-processed",
+    "almost-done"
+   ],
+   "notes": "Already processed, then the white background replaced with light grey (#EDEDED).",
+   "expected_no_change": false
+  },
+  {
+   "id": "almost-low-gold-necklace",
+   "file": "almost-low-gold-necklace.jpg",
+   "source": "https://www.pexels.com/photo/a-necklace-on-a-white-background-7134458/",
+   "derive": {
+    "from": "done-gold-necklace-src",
+    "ops": [
+     {
+      "op": "shift",
+      "dx": 0.0,
+      "dy": 0.12,
+      "fill": "#FFFFFF"
+     }
+    ]
+   },
+   "origin": "derived",
+   "tier": "EASY",
+   "categories": [
+    "jewelry"
+   ],
+   "conditions": [
+    "already-processed",
+    "almost-done"
+   ],
+   "notes": "Already processed, then shifted 12% down: square and white, but off-centre vertically.",
+   "expected_no_change": false
+  }
+ ]
+}

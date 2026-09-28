@@ -1,0 +1,12 @@
+.cache
+build
+node_modules
+.git
+.env
+.env.*
+.react-router
+gpu-service
+tests
+docs
+*.md
+.shopify

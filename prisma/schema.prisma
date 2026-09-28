@@ -1,0 +1,293 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Owned by @shopify/shopify-app-session-storage-prisma. Keep as is.
+model Session {
+  id                  String    @id
+  shop                String
+  state               String
+  isOnline            Boolean   @default(false)
+  scope               String?
+  expires             DateTime?
+  accessToken         String
+  userId              BigInt?
+  firstName           String?
+  lastName            String?
+  email               String?
+  accountOwner        Boolean   @default(false)
+  locale              String?
+  collaborator        Boolean?  @default(false)
+  emailVerified       Boolean?  @default(false)
+  refreshToken        String?
+  refreshTokenExpires DateTime?
+}
+
+model Shop {
+  id                 String    @id @default(cuid())
+  domain             String    @unique
+  /// Last install or re-authentication (set by the afterAuth hook). An
+  /// app/uninstalled webhook triggered before this is a stale retry.
+  installedAt        DateTime  @default(now())
+  uninstalledAt      DateTime?
+  /// shop/redact received. The data is erased once the shop is uninstalled;
+  /// maintenance keeps retrying the purge until the row is gone.
+  redactRequestedAt  DateTime?
+  /// Cached sum of CreditLedger.delta for this shop. Only changed in the same
+  /// transaction that inserts a ledger row.
+  creditBalance      Int       @default(0)
+  freeCreditsGranted Boolean   @default(false)
+  settings           Json      @default("{}")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  presets       Preset[]
+  jobs          Job[]
+  items         JobItem[]
+  ledger        CreditLedger[]
+  purchases     Purchase[]
+  notifications Notification[]
+}
+
+model Preset {
+  id                 String   @id @default(cuid())
+  shopId             String
+  name               String
+  isDefault          Boolean  @default(false)
+  aspect             String   @default("1:1") // "1:1" | "4:5"
+  marginPct          Int      @default(8)
+  removeBg           Boolean  @default(true)
+  bgColor            String   @default("#FFFFFF")
+  upscale            Boolean  @default(false)
+  upscaleThresholdPx Int      @default(1200)
+  targetPx           Int      @default(2048)
+  aiMetadata         Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId])
+}
+
+enum JobStatus {
+  reading // fetching product media from Shopify
+  estimated // media read, waiting for the merchant to confirm cost and start
+  processing // items going through the GPU pipeline
+  review // merchant approves / rejects
+  applying // approved items being written back to Shopify
+  done
+  failed
+  cancelled
+}
+
+enum JobItemStatus {
+  queued
+  processing
+  ready // processing's final status READY: every automatic check passed, no flags
+  flagged // NEEDS_REVIEW: a result exists but the checks can't vouch for it (flags say why)
+  /// NO_CHANGE: the photo already met the preset, so nothing was made to apply. Never applied,
+  /// never charged, not reserved; "Retry with stronger model" can still send it back.
+  unchanged
+  approved
+  rejected
+  applying
+  applied
+  failed
+  restore_queued
+  restoring
+  restored
+}
+
+model Job {
+  id               String    @id @default(cuid())
+  shopId           String
+  presetSnapshot   Json
+  filter           Json
+  status           JobStatus @default(reading)
+  /// All items in the job (lifetime), rewritten by refreshJobState.
+  total            Int       @default(0)
+  /// Completed and failed images of the current phase (processing or applying), rewritten by
+  /// refreshJobState. Reset to 0 when a phase starts.
+  done             Int       @default(0)
+  failed           Int       @default(0)
+  estimatedCredits Int       @default(0)
+  bulkOperationId  String?   @unique
+  /// Why the job failed, or notices for the merchant (see app/lib/progress.ts).
+  error            String?
+  /// Client-supplied idempotency key (New job form, API Idempotency-Key): a replayed
+  /// request returns the job it created instead of a second one.
+  requestKey       String?
+  /// Start processing as soon as reading finishes (API-created jobs). Only reserves credits;
+  /// nothing is written to Shopify before the merchant approves.
+  autoStart        Boolean   @default(false)
+  /// Snapshot taken when a phase (processing or applying) starts, so progress is scoped to
+  /// the current phase: images it started with, failed images before it started, and when.
+  phaseTotal       Int       @default(0)
+  phaseFailedBase  Int       @default(0)
+  phaseStartedAt   DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  startedAt        DateTime?
+  /// When the latest phase ended (processing or applying), or the job closed.
+  completedAt      DateTime?
+
+  shop          Shop           @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  items         JobItem[]
+  notifications Notification[]
+
+  @@unique([shopId, requestKey])
+  @@index([shopId, createdAt])
+  @@index([status, updatedAt])
+}
+
+model JobItem {
+  id              String        @id @default(cuid())
+  jobId           String
+  shopId          String
+  productId       String
+  productTitle    String        @default("")
+  mediaId         String
+  position        Int
+  alt             String?
+  originalUrl     String
+  /// Shopify CDN URL of the image, for thumbnails in the picker (append &width=).
+  thumbnailUrl    String?
+  /// Unticked by the merchant before starting; dropped when the job starts.
+  excluded        Boolean       @default(false)
+  mimeType        String?
+  width           Int?
+  height          Int?
+  fileSize        Int?
+  status          JobItemStatus @default(queued)
+  upscaleEligible Boolean       @default(false)
+  upscaleApplied  Boolean       @default(false)
+  backupKey       String?
+  outputKey       String?
+  previewKey      String?
+  beforeKey       String?
+  maskKey         String?
+  outputFormat    String?
+  outputWidth     Int?
+  outputHeight    Int?
+  flags           Json          @default("[]")
+  metrics         Json?
+  fidelity        Float?
+  models          Json?
+  /// How the image was made (image service `processing` + duration_ms): methods, Replicate
+  /// calls, estimated AI cost, fallback reason, quality score. For cost/quality monitoring.
+  processing      Json?
+  creditsReserved Int           @default(0)
+  creditsCharged  Int           @default(0)
+  /// Set when the fallback path had to create a new media object instead of
+  /// replacing in place. Restores target this id.
+  appliedMediaId  String?
+  appliedAt       DateTime?
+  restoredAt      DateTime?
+  attempts        Int           @default(0)
+  /// Set while an in-flight item waits for an automatic retry (BullMQ backoff after a
+  /// retryable failure). Until then it doesn't hold one of the shop's SHOP_CONCURRENCY slots,
+  /// so the shop's other images, restores and applies keep moving. Cleared when claimed.
+  retryAt         DateTime?
+  error           String?
+  /// Machine-readable reason for `error` (worker/messages.ts itemFailureCode). Apply failures
+  /// are prefixed "apply_", restore failures "restore_".
+  errorCode       String?
+  /// SHA-256 of the original's bytes, computed while backing it up.
+  sourceSha256    String?
+  /// sha256(version | image-service pipeline | media | sourceSha256 | settings): an item of the
+  /// same shop with the same key and a usable output can be reused instead of processing
+  /// again (app/lib/reuse.server.ts).
+  resultKey       String?
+  /// "Retry with stronger model": the image service is asked to skip the free local model and
+  /// use its paid (escalation) backend first (settings.force_escalation). Stays set for the
+  /// item's later reprocessing (Retry failed), and is part of the result key.
+  forceEscalation Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  job  Job  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, mediaId])
+  @@index([jobId, status])
+  // The last changed images of a job (GET /api/image-jobs/:jobId/items?sort=recent, polled
+  // by the job page's cleaning strip): read backwards, a few rows whatever the job's size.
+  @@index([jobId, updatedAt])
+  @@index([mediaId])
+  @@index([shopId, status])
+  @@index([shopId, resultKey])
+}
+
+/// In-app notices for the merchant (a job finished processing, finished applying, or needs
+/// credits). No personal data. Deleted with the shop or job.
+model Notification {
+  id        String    @id @default(cuid())
+  shopId    String
+  jobId     String?
+  kind      String // job_processed | job_applied | job_needs_credits
+  tone      String // success | warning | critical | info
+  title     String
+  body      String?
+  url       String
+  /// One notification per event, however often the code path runs.
+  dedupeKey String    @unique
+  readAt    DateTime?
+  emailedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  job  Job? @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, readAt, createdAt])
+  @@index([jobId])
+}
+
+model CreditLedger {
+  id             String   @id @default(cuid())
+  shopId         String
+  delta          Int
+  reason         String // free_grant | purchase | apply | adjustment
+  /// Makes every credit movement safe to retry: "apply:<itemId>", "purchase:<purchaseId>", "free:<shopId>".
+  idempotencyKey String   @unique
+  jobItemId      String?
+  purchaseId     String?
+  note           String?
+  createdAt      DateTime @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, createdAt])
+}
+
+model Purchase {
+  id              String    @id @default(cuid())
+  shopId          String
+  shopifyChargeId String?   @unique
+  pack            String
+  credits         Int
+  amount          Decimal   @db.Decimal(10, 2)
+  currency        String    @default("USD")
+  status          String    @default("pending") // pending | active | declined | expired
+  test            Boolean   @default(false)
+  creditedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, createdAt])
+}
+
+/// People who asked to hear about the web app / API (non-Shopify) version.
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  interest  String? // e.g. "web", "api", "woocommerce"
+  createdAt DateTime @default(now())
+}

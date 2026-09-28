@@ -1,0 +1,45 @@
+# Production app "Padly" (App Store listing "Padly: Bulk Background Remover"), served from
+# the VPS at images.qancha.live. Deploy config changes with:
+#   npx shopify app deploy --config production
+# Local development uses shopify.app.toml (a separate app, "Padly Dev"), so `npm run dev`
+# never touches this app's URLs.
+client_id = "8710ae552eb518d2daee0291f4ce837c"
+name = "Padly"
+application_url = "https://images.qancha.live"
+embedded = true
+
+[build]
+# Never let a dev session repoint the live app at a laptop tunnel.
+automatically_update_urls_on_dev = false
+
+[access_scopes]
+# Products + files only. No protected customer data: we never touch orders or customers.
+scopes = "read_products,write_products,read_files,write_files"
+
+[auth]
+# Managed install + token exchange don't use redirects; Shopify still requires one URL.
+redirect_urls = ["https://images.qancha.live/auth/callback"]
+
+[webhooks]
+# Keep in step with ApiVersion in app/shopify.server.ts.
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = ["app/uninstalled"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = ["app/scopes_update"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/bulk_operations/finish"
+  topics = ["bulk_operations/finish"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app_purchases_one_time/update"
+  topics = ["app_purchases_one_time/update"]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/compliance"
+  compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]

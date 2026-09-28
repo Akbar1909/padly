@@ -1,0 +1,11 @@
+[Unit]
+Description=Padly nightly backup (database dump + storage mirror, 14-day retention)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/visual-image-optimizer
+ExecStart=/opt/visual-image-optimizer/scripts/backup.sh
+StandardOutput=append:/var/log/vio-backup.log
+StandardError=append:/var/log/vio-backup.log

@@ -1,0 +1,85 @@
+# Production on a single VPS: web app, workers, Postgres, Redis and Nginx.
+# The GPU service runs separately on serverless GPU (Modal / RunPod) and
+# storage is Cloudflare R2; both are configured through .env.
+#
+#   cp .env.example .env   # fill it in
+#   docker compose up -d --build
+#   docker compose up -d --scale worker=3   # more throughput
+services:
+  app:
+    build: .
+    image: vio-app
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://vio:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@postgres:5432/vio?schema=public
+      REDIS_URL: redis://redis:6379
+      PORT: "3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/healthz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  worker:
+    image: vio-app
+    command: ["npm", "run", "worker"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://vio:${POSTGRES_PASSWORD}@postgres:5432/vio?schema=public
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      app:
+        condition: service_healthy # app runs the migrations
+    restart: unless-stopped
+    stop_grace_period: 3m # let in-flight images finish
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vio
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: vio
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vio"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    # BullMQ needs noeviction; AOF so queued work survives a restart.
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?set APP_DOMAIN}
+    volumes:
+      - ./deploy/nginx/templates:/etc/nginx/templates:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      # Host directory, so `certbot renew --webroot -w /var/www/certbot` on the host works.
+      - /var/www/certbot:/var/www/certbot:ro
+    depends_on:
+      app:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+
+volumes:
+  pg-data:
+  redis-data:

@@ -1,0 +1,202 @@
+# Single shared VPS behind an existing reverse proxy (Caddy on the host):
+# app, worker, image service, Postgres, Redis and S3-compatible storage in one project.
+# Only the web app is published, on 127.0.0.1:${APP_PORT}; the Caddy site block for it
+# (body limits, security headers) is deploy/Caddyfile.images.
+#
+# Memory is capped per container so this stack can't starve other services on
+# the host. Storage is RustFS (S3-compatible, Apache-2.0; MinIO no longer
+# publishes images) on the internal network until Cloudflare R2 is set up;
+# browsers load previews through the app (S3_BROWSER_PROXY), so the store is
+# never exposed.
+#
+#   docker compose -f docker-compose.vps.yml up -d --build
+#
+# Backups: scripts/backup.sh from root's cron (see README, Backups).
+name: vio
+
+# Docker's default json-file log never rotates; cap every container at 10 MB x 3 files.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-app-env: &app-env
+  DATABASE_URL: postgresql://vio:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@postgres:5432/vio?schema=public
+  REDIS_URL: redis://redis:6379
+  S3_ENDPOINT: http://storage:9000
+  S3_REGION: us-east-1
+  S3_BUCKET: vio-images
+  S3_ACCESS_KEY_ID: ${STORAGE_ACCESS_KEY:?set STORAGE_ACCESS_KEY}
+  S3_SECRET_ACCESS_KEY: ${STORAGE_SECRET_KEY:?set STORAGE_SECRET_KEY}
+  S3_FORCE_PATH_STYLE: "true"
+  S3_CREATE_BUCKET: "true"
+  S3_BROWSER_PROXY: "true"
+  GPU_SERVICE_URL: http://gpu-service:8000
+  GPU_SERVICE_SECRET: ${GPU_SERVICE_SECRET:?set GPU_SERVICE_SECRET}
+
+services:
+  app:
+    build: .
+    image: vio-app
+    env_file: .env
+    environment:
+      <<: *app-env
+      PORT: "3000"
+    ports:
+      - "127.0.0.1:${APP_PORT:-3500}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      storage:
+        condition: service_started
+    mem_limit: 512m
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/healthz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  worker:
+    image: vio-app
+    command: ["npm", "run", "worker"]
+    env_file: .env
+    environment:
+      <<: *app-env
+      # Item tasks this container runs at once (IMAGE_WORKER_CONCURRENCY is an alias that wins
+      # when set). It does not set image throughput: the gpu-service's MAX_CONCURRENCY (1 below)
+      # and SHOP_CONCURRENCY do; extra slots only wait on the service.
+      WORKER_CONCURRENCY: "3"
+      # Images one shop can have in flight, so one big catalog can't starve other shops.
+      SHOP_CONCURRENCY: "2"
+      # Retries per image (ITEM_TASK_ATTEMPTS, default 5) back off from ITEM_RETRY_BASE_MS
+      # (default 30 s: 30 s, 1 min, 2 min, 4 min). Set them in .env so the app and the worker,
+      # which both enqueue image tasks, use the same values.
+      # How long one image may take in the gpu-service, queueing included: a CPU cut-out
+      # (~6-9 s here), an escalation to Replicate when its checks fail (seconds; at most
+      # REPLICATE_TIMEOUT_S), and an upscale (Replicate, or up to ~1 min on the CPU when
+      # Replicate is down), behind up to two others. Try-it has its own 90 s limit.
+      # Budget: a run the worker gave up on isn't cancelled in the gpu-service, so each timed-out
+      # attempt holds its only slot (MAX_CONCURRENCY 1) for up to this long for every shop. A
+      # timeout is therefore tried at most twice (worker/retries.ts), not ITEM_TASK_ATTEMPTS
+      # times: worst case 2 x 8 min + 30 s backoff per image, during which that image doesn't
+      # hold one of its shop's SHOP_CONCURRENCY slots while it waits to retry.
+      GPU_TIMEOUT_MS: ${GPU_TIMEOUT_MS:-480000}
+    depends_on:
+      app:
+        condition: service_healthy # app runs the migrations
+    mem_limit: 768m
+    restart: unless-stopped
+    logging: *logging
+    stop_grace_period: 3m # let in-flight images finish
+
+  gpu-service:
+    build:
+      context: ./gpu-service
+      # Real models on CPU (BiRefNet-lite @512 + Real-ESRGAN). See the file for timings.
+      dockerfile: Dockerfile.cpu-ml
+    image: vio-gpu-service:cpu-ml
+    environment:
+      # Cheapest safe method first (README "Image processing cost"). Production .env:
+      #   GPU_MODEL_BACKEND=local  GPU_ESCALATION_BACKEND=replicate  GPU_FALLBACK_BACKEND=none
+      # Cut-outs run on the CPU models here (BiRefNet-lite, free) and are validated; only a
+      # cut-out that fails its checks goes to Replicate's full BiRefNet. AI upscaling runs here
+      # only for tiny inputs (see below) and otherwise on Replicate (same Real-ESRGAN models).
+      # local = models in this container (CPU); replicate = models on Replicate;
+      # classic = no-ML stand-in.
+      MODEL_BACKEND: ${GPU_MODEL_BACKEND:-local}
+      ESCALATION_BACKEND: ${GPU_ESCALATION_BACKEND:-none}
+      # Optional cap on paid calls per UTC day (0 = none); past it results stay local + flagged.
+      ESCALATION_DAILY_MAX_CALLS: ${GPU_ESCALATION_DAILY_MAX_CALLS:-0}
+      # Quality-gated local-first rollout (docs/gpu-service-contract.md "Routing and the quality
+      # gate"). Only a local cut-out that passes every check with margin skips Replicate.
+      # LOCAL_PROCESSING_ENABLED=false: kill switch, every cut-out goes to Replicate first.
+      # LOCAL_PROCESSING_PERCENTAGE: share of photos (by source hash) tried locally first.
+      # LOCAL_PROCESSING_SHADOW=true: judge the local cut-out but always use Replicate's
+      # (measures the gate on live traffic; costs as much as Replicate-only).
+      LOCAL_PROCESSING_ENABLED: ${GPU_LOCAL_PROCESSING_ENABLED:-true}
+      LOCAL_PROCESSING_PERCENTAGE: ${GPU_LOCAL_PROCESSING_PERCENTAGE:-100}
+      LOCAL_PROCESSING_SHADOW: ${GPU_LOCAL_PROCESSING_SHADOW:-false}
+      REPLICATE_API_TOKEN: ${REPLICATE_API_TOKEN:-}
+      # Only for MODEL_BACKEND=replicate (the old setup): re-run a failed request on the CPU.
+      FALLBACK_BACKEND: ${GPU_FALLBACK_BACKEND:-none}
+      # After this long a Replicate call gives up (the local result is kept, or for upscaling
+      # the CPU path below is used); Replicate is then skipped for FALLBACK_COOLDOWN_S (120 s).
+      REPLICATE_TIMEOUT_S: "75"
+      # CPU Real-ESRGAN is slow (measured 2026-09-27 on a laptop CPU, 3 threads, 128 px tiles:
+      # x2 on 0.25 MP 14 s, on 1.2 MP 71 s; x4 on 0.25 MP 63 s; this VPS is slower). So AI
+      # upscaling runs here only as x2 on inputs up to 0.25 MP; everything else
+      # goes to Replicate, or, when Replicate is unavailable, gets x2 / Lanczos (not billed
+      # as AI upscaling) as before.
+      LOCAL_MAX_AI_SCALE: "2"
+      LOCAL_MAX_AI_UPSCALE_PIXELS: "250000"
+      GPU_SERVICE_SECRET: ${GPU_SERVICE_SECRET}
+      # Presigned URLs point at http://storage:9000 on the internal network.
+      ALLOW_HTTP_URLS: "1"
+      MAX_CONCURRENCY: "1"
+      # Input caps sized for the 2g limit with the CPU models loaded (~1 GB idle, ~1.35 GB peak
+      # on a normal photo). Shopify product images are at most 25 MP / 20 MB. Measured
+      # 2026-09-27: the worst 30 MP input (a mostly transparent PNG) adds ~0.2 GB over a normal
+      # photo's peak (decoding alone ~0.45 GB); larger images are refused from the header.
+      # Downloads wait for the semaphore in memory, hence the byte cap.
+      MAX_SOURCE_PIXELS: "30000000"
+      MAX_WORKING_PIXELS: "16000000"
+      MAX_SOURCE_BYTES: "26214400"
+      # Real-ESRGAN on CPU: 512 px tiles need several GB at x4 (1 GB+ per feature map);
+      # 128 px tiles cut peak memory ~5x for ~15% more time.
+      UPSCALE_TILE_SIZE: "128"
+      UPSCALE_TILE_PAD: "16"
+    mem_limit: 2g # normal photos peak ~1.35 GB
+    restart: unless-stopped
+    logging: *logging
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vio
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: vio
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    mem_limit: 384m
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vio"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    # BullMQ needs noeviction; AOF so queued work survives a restart. maxmemory stays below
+    # mem_limit so a full Redis refuses writes (errors in the app logs) instead of being
+    # OOM-killed and losing queued work.
+    command:
+      ["redis-server", "--appendonly", "yes", "--maxmemory", "160mb", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redis-data:/data
+    mem_limit: 192m
+    restart: unless-stopped
+    logging: *logging
+
+  storage:
+    image: rustfs/rustfs:1.0.0
+    command: ["/data"]
+    environment:
+      RUSTFS_ACCESS_KEY: ${STORAGE_ACCESS_KEY}
+      RUSTFS_SECRET_KEY: ${STORAGE_SECRET_KEY}
+    volumes:
+      - storage-data:/data
+    mem_limit: 384m
+    restart: unless-stopped
+    logging: *logging
+
+volumes:
+  pg-data:
+  redis-data:
+  storage-data:

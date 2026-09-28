@@ -1,0 +1,81 @@
+# syntax=docker/dockerfile:1.7
+# Real models on CPU: MODEL_BACKEND=local with BiRefNet + Real-ESRGAN, CPU-only PyTorch.
+# For servers without a GPU (no per-image cost).
+#
+# Default: BiRefNet-lite at 512 px, ~6 s and ~1.3 GB per image on 3 vCPUs, with results
+# very close to full BiRefNet at 1024 px (~45 s, ~3.5 GB). Benchmarked 2026-09-27, before
+# the mirrored stability pass (ESCALATE_FLIP_DISAGREEMENT, on by default) ran the model a
+# second time per cut-out: +1.9 s (+86%) segmentation on 2 Apple-silicon threads, and the
+# small-product refine path went from ~3.8 to ~7.5 s. Not yet re-benchmarked on the VPS;
+# expect a similar share there. The full model would reach ~90 s: set
+# ESCALATE_FLIP_DISAGREEMENT=0 with it (its 0.015 limit is calibrated for the lite model).
+# Full model: --build-arg BIREFNET_REPO=ZhengPeng7/BiRefNet
+#             --build-arg BIREFNET_REVISION=e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4
+#             --build-arg BIREFNET_SHA256="config.json=c97ea21569daf66b205491a4635147dd3bc42c7c168b89d7d75b53f67ef548ae BiRefNet_config.py=e7b8c2a74f6cea6a59553d517f71d47f2c1d90e670a13416af17c25fe2f3dc52 birefnet.py=208771ae626f653d64128fbf2d6ac9f8e645c5cc5e286258a73ec3322bbfe5ef handler.py=b95f5806bfcd575ccff2a9f08816ae0e5d4df1e81b48797f9997f68b531404a5 model.safetensors=9ab37426bf4de0567af6b5d21b16151357149139362e6e8992021b8ce356a154"
+#             and set BIREFNET_INPUT_SIZE=1024 at run time.
+#   docker build -f Dockerfile.cpu-ml -t vio-gpu-service:cpu-ml .
+FROM python:3.11-slim
+
+ARG EAST_URL="https://www.dropbox.com/s/r2ingd0l3zt8hxs/frozen_east_text_detection.tar.gz?dl=1"
+ARG EAST_SHA256=9b486f3c3eee77b4c8cc91a83892c37026cca7d29b79bf3b93772ccd2db58454
+# Pinned revision so results can't drift (both MIT-licensed).
+ARG BIREFNET_REPO=ZhengPeng7/BiRefNet_lite
+ARG BIREFNET_REVISION=aa62cd87eafb9cc43056d08ef3615a14628b831d
+# Every downloaded model file is checked against these sha256 sums (checked 2026-09-27
+# against the Hugging Face LFS/git hashes). BIREFNET_SHA256 lists "file=sha256" pairs for
+# BIREFNET_REVISION and is also the list of files fetched; change them together.
+ARG BIREFNET_SHA256="config.json=9dc8614fccddd40c601aeadc69b9db6dd820598179b2a2198492e6ffa016a824 BiRefNet_config.py=e7b8c2a74f6cea6a59553d517f71d47f2c1d90e670a13416af17c25fe2f3dc52 birefnet.py=af8568b5be406bf4d2a68a7ed6d72e40f73b37a1fb6fc9ebd71b5b3cbcd069c9 handler.py=15630ff8225d2d343ca3f7c0a9ef688ce0335d87a3255ae5a7903a16b147259f model.safetensors=4417d89795250e698c3cb0ae8df15743810065f646f48a694fdfa7ca052d0815"
+ARG REALESRGAN_X4_SHA256=4fa0d38905f75ac06eb49a7951b426670021be3018265fd191d2125df9d682f1
+ARG REALESRGAN_X2_SHA256=49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends curl ca-certificates libgomp1 \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN useradd --system --uid 10001 --create-home --home-dir /home/app app \
+ && mkdir -p /models/birefnet /srv \
+ && chown -R app:app /models /srv
+
+WORKDIR /srv
+COPY requirements.txt ./
+RUN pip install -r requirements.txt \
+ && pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1 torchvision==0.20.1 \
+ && pip install transformers==4.46.3 "huggingface_hub>=0.24,<1.0" "safetensors>=0.4.5,<1.0" \
+      timm==1.0.12 einops==0.8.0 kornia==0.7.4 spandrel==0.4.1
+
+USER app
+RUN curl -fsSL --retry 3 -o /tmp/east.tar.gz "${EAST_URL}" \
+ && tar -xzf /tmp/east.tar.gz -C /models frozen_east_text_detection.pb \
+ && echo "${EAST_SHA256}  /models/frozen_east_text_detection.pb" | sha256sum -c - \
+ && rm /tmp/east.tar.gz \
+ && curl -fsSL --retry 3 -o /models/RealESRGAN_x4plus.pth https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth \
+ && echo "${REALESRGAN_X4_SHA256}  /models/RealESRGAN_x4plus.pth" | sha256sum -c - \
+ && curl -fsSL --retry 3 -o /models/RealESRGAN_x2plus.pth https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth \
+ && echo "${REALESRGAN_X2_SHA256}  /models/RealESRGAN_x2plus.pth" | sha256sum -c - \
+ && for pair in ${BIREFNET_SHA256}; do \
+      f="${pair%%=*}"; \
+      curl -fsSL --retry 3 -o "/models/birefnet/$f" "https://huggingface.co/${BIREFNET_REPO}/resolve/${BIREFNET_REVISION}/$f" \
+      && echo "${pair#*=}  /models/birefnet/$f" | sha256sum -c - || exit 1; \
+    done
+
+COPY --chown=app:app app ./app
+
+ENV MODEL_BACKEND=local \
+    DEVICE=cpu \
+    MODELS_DIR=/models \
+    BIREFNET_MODEL_ID=/models/birefnet \
+    BIREFNET_INPUT_SIZE=512 \
+    EAST_MODEL_PATH=/models/frozen_east_text_detection.pb \
+    HF_HUB_OFFLINE=1 \
+    OMP_NUM_THREADS=3
+
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
+  CMD python -c "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=4).status == 200 else 1)"
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--timeout-keep-alive", "75"]

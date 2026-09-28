@@ -1,0 +1,42 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "6d821a813c870a4644a543f7674ba2a3"
+name = "Padly Dev"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+# Products + files only. No protected customer data: we never touch orders or customers.
+scopes = "read_products,write_products,read_files,write_files"
+
+[webhooks]
+# Keep in step with ApiVersion in app/shopify.server.ts.
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/bulk_operations/finish"
+  topics = [ "bulk_operations/finish" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app_purchases_one_time/update"
+  topics = [ "app_purchases_one_time/update" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/compliance"
+  compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
+
+[auth]
+redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]

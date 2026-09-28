@@ -1,0 +1,47 @@
+# Caddy site block for images.qancha.live (Padly, docker-compose.vps.yml publishes the app on
+# 127.0.0.1:3500). The host's Caddy also serves other sites, so change only this block:
+#
+#   1. Back up:   cp /etc/caddy/Caddyfile /etc/caddy/Caddyfile.bak-$(date +%Y%m%d)
+#   2. First diff the live `images.qancha.live { ... }` block in /etc/caddy/Caddyfile against the
+#      one below and carry over any extra directives it has (e.g. log, tls). Then replace the
+#      live block with the result. Leave every other site block as it is.
+#   3. Check:     caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+#   4. Apply:     systemctl reload caddy        (graceful; no restart, other sites stay up)
+#   5. Verify:    curl -sI https://images.qancha.live/ | grep -iE 'strict-transport|nosniff|referrer|^via'
+#                 then open the app in the Shopify admin and run one try-it upload on the landing page.
+#   Roll back:    copy the .bak file back, validate, reload.
+#
+# Content-Security-Policy stays with the app: pages inside the Shopify admin get a per-shop
+# frame-ancestors, everything else gets frame-ancestors 'none'. Don't add X-Frame-Options or a
+# CSP here, or the embedded app stops loading in the admin.
+
+images.qancha.live {
+	# Body limits, so no request can make the 512 MB app container buffer a huge body. The
+	# try-it upload is capped at 12 MiB by the app; it posts to /try.data from the page (React
+	# Router fetcher) or /try without JavaScript. Everything else (embedded forms, webhooks) is
+	# far below 2 MB.
+	@try path /try /try.data
+	request_body @try {
+		max_size 13MB
+	}
+	@rest not path /try /try.data
+	request_body @rest {
+		max_size 2MB
+	}
+
+	# Deferred, so these replace any copy from the app instead of duplicating it.
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Via
+		defer
+	}
+
+	encode gzip
+
+	# Don't configure trusted_proxies (e.g. for Cloudflare) without updating clientIp() in
+	# app/lib/try.server.ts: the try-it per-IP limit trusts the first X-Forwarded-For entry,
+	# which Caddy sets to the real client IP (it replaces any value the client sent).
+	reverse_proxy 127.0.0.1:3500
+}

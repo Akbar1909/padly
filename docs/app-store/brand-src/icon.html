@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Render wrapper for the Padly app icon (public/brand/icon.svg). From the repo root:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
+      --hide-scrollbars --force-device-scale-factor=1 --user-data-dir="$TMPDIR/chrome-brand" \
+      --window-size=1200,1200 --screenshot="$PWD/public/brand/icon-1200.png" \
+      "file://$PWD/docs/app-store/brand-src/icon.html"
+
+  Then the small sizes, with Pillow (gpu-service/.venv/bin/python):
+
+    from PIL import Image, ImageDraw
+    big = Image.open("public/brand/icon-1200.png").convert("RGB")
+    big.resize((180, 180), Image.LANCZOS).save("public/apple-touch-icon.png", optimize=True)
+    mask = Image.new("L", (1200, 1200), 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, 1199, 1199), radius=216, fill=255)
+    tab = big.convert("RGBA"); tab.putalpha(mask)
+    tab.save("public/favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
+
+  The App Store icon and the apple-touch icon stay full-bleed squares (Shopify and iOS round
+  the corners); only the browser-tab favicon gets rounded corners.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Padly icon</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 1200px;
+        overflow: hidden;
+        background: #16130f;
+      }
+      img {
+        display: block;
+        width: 1200px;
+        height: 1200px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="../../../public/brand/icon.svg" alt="" />
+  </body>
+</html>

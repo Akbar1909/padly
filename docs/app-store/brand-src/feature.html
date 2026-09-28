@@ -1,0 +1,160 @@
+<!doctype html>
+<!--
+  App Store feature image (1600 x 900) and social preview (1200 x 630) for Padly.
+  One focal point: an everyday product photo becomes a clean, evenly padded shot.
+  Rules it follows (App Store best practices): solid background, no pricing, stats,
+  Shopify logos or subtitle text. Photos are the landing examples in public/examples (Pexels,
+  free licence), processed by the app. The headphones carry no third-party branding.
+
+  Render from the repo root (?og switches to the 1200 x 630 layout):
+
+    CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    "$CHROME" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+      --user-data-dir="$TMPDIR/chrome-brand" --window-size=1600,900 \
+      --screenshot="$PWD/public/brand/feature-1600x900.png" "file://$PWD/docs/app-store/brand-src/feature.html"
+    "$CHROME" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+      --user-data-dir="$TMPDIR/chrome-brand" --window-size=1200,630 \
+      --screenshot="$PWD/public/brand/og-1200x630.png" "file://$PWD/docs/app-store/brand-src/feature.html?og"
+
+  Headless Chrome sometimes keeps running after writing the file; stop it once the PNG exists.
+  The fonts come from Google Fonts, so render with a network connection.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Padly feature image</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600&display=block"
+    />
+    <style>
+      :root {
+        --ink: #16130f;
+        --paper: #f3efe6;
+        --accent: #ff5a1f;
+        /* Everything is laid out on a 1600 x 900 stage and scaled for other sizes. */
+        --scale: 1;
+      }
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .stage {
+        position: relative;
+        width: 1600px;
+        height: 900px;
+        background: var(--ink);
+        transform-origin: 0 0;
+        transform: scale(var(--scale));
+        font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .brand {
+        position: absolute;
+        left: 96px;
+        top: 76px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: var(--paper);
+        font-weight: 600;
+        font-size: 60px;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .brand img {
+        width: 76px;
+        height: 76px;
+        border-radius: 18px;
+        display: block;
+      }
+
+      .photo {
+        position: absolute;
+        display: block;
+        object-fit: cover;
+      }
+      .before {
+        left: 170px;
+        top: 262px;
+        width: 440px;
+        height: 440px;
+        border-radius: 16px;
+        transform: rotate(-5deg);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+      }
+
+      .arrow {
+        position: absolute;
+        left: 652px;
+        top: 452px;
+        width: 150px;
+        height: 60px;
+      }
+
+      /* The focal point: the cleaned photo inside the brand's dashed selection frame. */
+      .after {
+        left: 872px;
+        top: 150px;
+        width: 600px;
+        height: 600px;
+        border-radius: 10px;
+        background: #fff;
+      }
+      .frame {
+        position: absolute;
+        left: 836px;
+        top: 114px;
+        width: 672px;
+        height: 672px;
+      }
+
+      /* 1200 x 630 social preview: same artwork, scaled to fit and centred. */
+      body.og .stage {
+        --scale: 0.7;
+        margin-left: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="brand"><img src="../../../public/brand/icon.svg" alt="" />Padly</div>
+
+      <img class="photo before" src="../../../public/examples/headphones-before.jpg" alt="" />
+
+      <svg class="arrow" viewBox="0 0 150 60" aria-hidden="true">
+        <path
+          d="M6 30 H132 M108 8 L136 30 L108 52"
+          fill="none"
+          stroke="#ff5a1f"
+          stroke-width="12"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+      <img class="photo after" src="../../../public/examples/headphones-after.jpg" alt="" />
+      <!-- 672 px frame, 12 px stroke: side 660 = 4 dash periods of 165 (96 + 69), so every corner gets an L. -->
+      <svg class="frame" viewBox="0 0 672 672" aria-hidden="true">
+        <rect
+          x="6"
+          y="6"
+          width="660"
+          height="660"
+          fill="none"
+          stroke="#ff5a1f"
+          stroke-width="12"
+          stroke-dasharray="96 69"
+          stroke-dashoffset="48"
+        />
+      </svg>
+    </div>
+    <script>
+      if (location.search.includes("og")) document.body.classList.add("og");
+    </script>
+  </body>
+</html>

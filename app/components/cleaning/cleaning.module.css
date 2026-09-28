@@ -1,0 +1,542 @@
+/* The job page's cleaning strip (CleaningStrip.tsx), inside a Polaris section: Polaris-like
+   greys and radii, one violet accent for the "working" light. Animations only move transforms,
+   opacity and clip-path, inside fixed boxes (the output's aspect ratio). */
+
+.strip {
+  --text: #303030;
+  --subdued: #616161;
+  --border: #e3e3e3;
+  --well: #f1f1f1;
+  --accent: #8051ff;
+  display: grid;
+  gap: 16px;
+  padding-top: 4px;
+  color: var(--text);
+}
+
+.group {
+  min-width: 0;
+}
+
+.label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.count {
+  font-weight: 450;
+  color: var(--subdued);
+}
+
+.activeGrid,
+.recentGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+/* Up to 3 cards (a shop has 2–3 images in flight); the heading counts any more. */
+.activeGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 600px;
+}
+.activeGrid > li:nth-child(n + 4) {
+  display: none;
+}
+
+.recentGrid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+@media (max-width: 600px) {
+  .activeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .activeGrid > li:nth-child(n + 3) {
+    display: none;
+  }
+  .recentGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+.card,
+.tile,
+.slot {
+  min-width: 0;
+  margin: 0;
+}
+
+.card {
+  --cycle: 3.6s;
+}
+
+.tile {
+  --reveal-ms: 1300ms;
+  --reveal-ease: cubic-bezier(0.55, 0.05, 0.35, 1);
+}
+
+/* Border-box: an empty slot's dashed border stays inside the same box as a card or tile. */
+.frame {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--well);
+  isolation: isolate;
+  contain: paint;
+}
+/* The hairline border sits above the images (a white preview would hide one underneath). */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
+  pointer-events: none;
+}
+
+.photo,
+.photoFill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+}
+
+.noPhoto {
+  background: repeating-linear-gradient(135deg, #ececec 0 8px, #f4f4f4 8px 16px);
+}
+
+/* A fixed line: an empty slot's (blank) title is as tall as a real one. */
+.title {
+  box-sizing: border-box;
+  height: 16px;
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── In progress: a brush keeps sweeping over the original ────────────────── */
+
+.cleaning .photo {
+  filter: saturate(0.9);
+}
+
+/* Where the brush has passed, a light wash (three rows, one per pass), gone at the end of the loop. */
+.wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.wash > span {
+  position: absolute;
+  left: -100%;
+  width: 200%;
+  height: 44%;
+  background: linear-gradient(90deg, rgb(255 255 255 / 0.4) 0 46%, rgb(255 255 255 / 0) 50%);
+  /* Rows overlap and fade into each other: no hard seams. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  transform: translateX(-69.2%);
+  animation: var(--cycle) cubic-bezier(0.45, 0.05, 0.45, 1) var(--sweep-offset, 0s) infinite;
+}
+.wash > span:nth-child(1) {
+  top: -6%;
+  animation-name: washRow1;
+}
+.wash > span:nth-child(2) {
+  top: 28%;
+  animation-name: washRow2;
+}
+.wash > span:nth-child(3) {
+  top: 62%;
+  animation-name: washRow3;
+}
+
+/* The stroke: bristle streaks trailing a brush head, three passes left to right, top to bottom. */
+.stroke {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 64%;
+  height: 36%;
+  opacity: 0;
+  pointer-events: none;
+  animation: sweep var(--cycle) cubic-bezier(0.45, 0.05, 0.45, 1) var(--sweep-offset, 0s) infinite;
+  will-change: transform, opacity;
+}
+
+/* A smear of paint: dense at the brush, thinning into streaks behind it, feathered edges. */
+.bristles {
+  position: absolute;
+  inset: 6% 0;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0) 0 1px,
+      rgb(255 255 255 / 0.95) 1px 2px,
+      rgb(255 255 255 / 0.5) 2px 3.5px,
+      rgb(80 70 120 / 0.16) 3.5px 4.2px,
+      rgb(255 255 255 / 0.8) 4.2px 5.6px,
+      rgb(255 255 255 / 0.15) 5.6px 7px
+    ),
+    linear-gradient(90deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 0.3) 50%, rgb(255 255 255 / 0.85) 95%, rgb(255 255 255 / 0.55) 100%);
+  border-radius: 0 45% 45% 0 / 0 50% 50% 0;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.55) 35%, #000 78%),
+    linear-gradient(180deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.55) 35%, #000 78%),
+    linear-gradient(180deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.brushHead {
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  width: 36px;
+  height: 58px;
+  transform: translateY(-78%);
+  filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 0.3));
+}
+
+/* A soft scanning light, slower than the brush. */
+.scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 0 49.4%, rgb(255 255 255 / 0.95) 49.8% 50.2%, transparent 50.6% 100%),
+    linear-gradient(180deg, transparent 0 46%, rgb(128 81 255 / 0.2) 50%, transparent 54% 100%);
+  transform: translateY(-50%);
+  animation: scan 2.8s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+.pill {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 7px 1px 6px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.14);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 550;
+  color: var(--text);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes sweep {
+  0% {
+    transform: translate(-110%, -4%);
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  28% {
+    transform: translate(175%, 6%);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(175%, 6%);
+    opacity: 0;
+  }
+  31% {
+    transform: translate(-110%, 88%);
+    opacity: 0;
+  }
+  34% {
+    opacity: 1;
+  }
+  59% {
+    transform: translate(175%, 98%);
+    opacity: 1;
+  }
+  61% {
+    transform: translate(175%, 98%);
+    opacity: 0;
+  }
+  62% {
+    transform: translate(-110%, 180%);
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+  }
+  90% {
+    transform: translate(175%, 190%);
+    opacity: 1;
+  }
+  92%,
+  100% {
+    transform: translate(175%, 190%);
+    opacity: 0;
+  }
+}
+
+/* Each row's lit edge follows the stroke's centre: same boundaries and easing as sweep. */
+@keyframes washRow1 {
+  0% {
+    transform: translateX(-69.2%);
+    opacity: 1;
+  }
+  28% {
+    transform: translateX(22%);
+  }
+  90% {
+    transform: translateX(22%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(22%);
+    opacity: 0;
+  }
+}
+@keyframes washRow2 {
+  0%,
+  31% {
+    transform: translateX(-69.2%);
+    opacity: 1;
+  }
+  59% {
+    transform: translateX(22%);
+  }
+  90% {
+    transform: translateX(22%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(22%);
+    opacity: 0;
+  }
+}
+@keyframes washRow3 {
+  0%,
+  62% {
+    transform: translateX(-69.2%);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(22%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(22%);
+    opacity: 0;
+  }
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(50%);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+}
+
+/* ─── Just cleaned: one brush stroke from the original to the preview ──────── */
+
+/* The original on top of the preview; the stroke wipes it away (clip edge slanted like the stroke). */
+.before {
+  position: absolute;
+  inset: 0;
+  background: var(--well);
+  clip-path: polygon(-29% 0, 200% 0, 200% 100%, -41% 100%);
+}
+.beforeStill {
+  clip-path: none;
+}
+
+.revealStroke {
+  position: absolute;
+  left: 0;
+  top: -8%;
+  width: 40%;
+  height: 116%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-137.5%) skewX(-6deg);
+}
+.revealStroke .bristles {
+  inset: 0;
+  border-radius: 40%;
+}
+.revealStroke .brushHead {
+  right: -14px;
+  width: 30px;
+  height: 48px;
+  transform: translateY(-60%);
+}
+
+.play .before {
+  animation: wipe var(--reveal-ms) var(--reveal-ease) var(--reveal-delay, 0ms) both;
+}
+.play .revealStroke {
+  animation: revealBrush var(--reveal-ms) var(--reveal-ease) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes wipe {
+  from {
+    clip-path: polygon(-29% 0, 200% 0, 200% 100%, -41% 100%);
+  }
+  to {
+    clip-path: polygon(126% 0, 200% 0, 200% 100%, 114% 100%);
+  }
+}
+
+/* The stroke's centre sits on the clip edge, -35% → 120% of the tile (it starts out of sight). */
+@keyframes revealBrush {
+  from {
+    transform: translateX(-137.5%) skewX(-6deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(250%) skewX(-6deg);
+    opacity: 1;
+  }
+}
+
+.badge {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  z-index: 2;
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 550;
+}
+.badgeCheck {
+  background: #ffd6a4;
+  color: #5e4200;
+}
+.badgeMuted {
+  background: #e3e3e3;
+  color: var(--text);
+}
+/* A flag shows once its image is revealed: hidden while the preview loads, then faded in. */
+.pending .badgeCheck {
+  opacity: 0;
+}
+.play .badgeCheck {
+  animation: fadeIn 240ms ease calc(var(--reveal-delay, 0ms) + var(--reveal-ms)) both;
+}
+
+.failed .photo {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+/* ─── Empty slots keep every box in place ─────────────────────────────────── */
+
+.slotFrame {
+  background: transparent;
+  border: 1px dashed #d4d4d4;
+  display: grid;
+  place-items: center;
+}
+.slotFrame::after {
+  display: none;
+}
+
+.slotText {
+  padding: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--subdued);
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ─── Reduced motion: a still "cleaning" state and a cross-fade ───────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .stroke,
+  .scan,
+  .wash,
+  .revealStroke {
+    display: none;
+  }
+  .cleaning::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgb(255 255 255 / 0.3);
+  }
+  .dot {
+    animation: none;
+  }
+  .play .before {
+    clip-path: none;
+    animation: fadeOut 450ms ease var(--reveal-delay, 0ms) both;
+  }
+  .play .badgeCheck {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+  }
+}

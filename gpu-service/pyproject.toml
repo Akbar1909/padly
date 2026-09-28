@@ -1,0 +1,18 @@
+[project]
+name = "visual-image-optimizer-gpu-service"
+version = "1.0.0"
+description = "GPU image-processing service for the Visual Image Optimizer Shopify app"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+filterwarnings = ["error::pytest.PytestUnraisableExceptionWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

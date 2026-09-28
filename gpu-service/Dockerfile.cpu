@@ -1,0 +1,43 @@
+# syntax=docker/dockerfile:1.7
+# CPU image for local dev / docker-compose: MODEL_BACKEND=classic (no ML), EAST text detector.
+#   docker build -f Dockerfile.cpu -t vio-gpu-service:cpu .
+#   docker run -p 8000:8000 -e ALLOW_UNSIGNED=1 -e ALLOW_HTTP_URLS=1 vio-gpu-service:cpu
+FROM python:3.11-slim
+
+ARG EAST_URL="https://www.dropbox.com/s/r2ingd0l3zt8hxs/frozen_east_text_detection.tar.gz?dl=1"
+ARG EAST_SHA256=9b486f3c3eee77b4c8cc91a83892c37026cca7d29b79bf3b93772ccd2db58454
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends curl ca-certificates libgomp1 \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN useradd --system --uid 10001 --create-home --home-dir /home/app app \
+ && mkdir -p /models /srv \
+ && chown app:app /models /srv
+
+WORKDIR /srv
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+USER app
+RUN curl -fsSL --retry 3 -o /tmp/east.tar.gz "${EAST_URL}" \
+ && tar -xzf /tmp/east.tar.gz -C /models frozen_east_text_detection.pb \
+ && echo "${EAST_SHA256}  /models/frozen_east_text_detection.pb" | sha256sum -c - \
+ && rm /tmp/east.tar.gz
+
+COPY --chown=app:app app ./app
+
+ENV MODEL_BACKEND=classic \
+    MODELS_DIR=/models \
+    EAST_MODEL_PATH=/models/frozen_east_text_detection.pb
+
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD python -c "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=4).status == 200 else 1)"
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--timeout-keep-alive", "75"]
